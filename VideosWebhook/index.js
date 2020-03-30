@@ -23,16 +23,16 @@ server.post('/getVideoDetails', (req, res) => {
     });
     responseFromAPI.on('end', () => {
       const videoDetails = JSON.parse(completeResponse);
-      let link='https://www.youtube.com/watch?v='
-      let dataToSend = `${link}${videoDetails.items[0].videoId}`;
+      let link='https://www.youtube.com/watch?v=';
+      let dataToSend = `${link}${videoDetails.items[0].id.videoId}`;
       return res.json({
-        displayText: dataToSend,
+        speech: dataToSend,
         source: 'get-Video-Details'
       });
     });
   }, (error) => {
     return res.json({
-      displayText: 'something went wrong',
+      speech: 'something went wrong',
       source: 'get-Video-Details'
     });
   });
