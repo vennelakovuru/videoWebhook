@@ -10,6 +10,8 @@ server.use(bodyParser.json());
 server.post('/getVideoDetails', (req, res) => {
   const apiKey= 'AIzaSyDhGASYUnmjszNIjzQ2Pr58YNc7xekWxWg';
   const query = req.body.result && req.body.result.parameters && req.body.result.parameters.video ? req.body.result.parameters.video : 'learn software';
+  console.log('request', req);
+  console.log(query);
   const reqUrl =encodeURI(`https://www.googleapis.com/youtube/v3/search?key=${apiKey}&q=${query}&order=date&part=snippet&type=video,id&maxResults=3`);
   https.get(reqUrl, (responseFromAPI) => {
     let completeResponse = '';
