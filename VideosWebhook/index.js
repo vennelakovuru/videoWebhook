@@ -25,6 +25,7 @@ server.post('/getVideoDetails', (req, res) => {
       let link='https://www.youtube.com/watch?v=';
       let dataToSend = link+videoDetails.items[0].id.videoId;
       console.log(dataToSend);
+      console.log(res);
       return res.json({
         speech: dataToSend,
         source: 'get-Video-Details'
