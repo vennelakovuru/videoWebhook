@@ -32,7 +32,7 @@ server.post('/getVideoDetails', (req, res) => {
             items: [
               {
                 simpleResponse: {
-                  textToSpeech: dataToSend
+                  textToSpeech: link+videoDetails.items[0].id.videoId
                 }
               }
             ]
@@ -42,7 +42,7 @@ server.post('/getVideoDetails', (req, res) => {
       return res.json({
         fulfillmentText: dataToSend,
         payload: speechResponse,
-        speech: dataToSend,
+        speech: link+videoDetails.items[0].id.videoId,
         source: 'get-Video-Details'
       });
     });
