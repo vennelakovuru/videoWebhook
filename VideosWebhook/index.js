@@ -32,7 +32,7 @@ server.post('/getVideoDetails', (req, res) => {
     });
   }, (error) => {
     return res.json({
-      speech: 'something went wrong',
+      speech: 'Something went wrong!',
       source: 'get-Video-Details'
     });
   });
