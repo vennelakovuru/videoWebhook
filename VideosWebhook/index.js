@@ -2,7 +2,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const https = require('https')
-const API_KEY = require('./apiKey');
 const cors = require('cors');
 const server = express();
 server.use(cors());
