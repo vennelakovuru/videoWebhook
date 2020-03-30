@@ -8,9 +8,9 @@ server.use(cors());
 server.use(bodyParser.json());
 
 server.post('/getVideoDetails', (req, res) => {
-
-  const reqUrl = 'https://www.googleapis.com/youtube/v3/search?key=AIzaSyDhGASYUnmjszNIjzQ2Pr58YNc7xekWxWg&q=dogs&order=date&part=snippet&type=video,id&maxResults=3';
-  console.log("hey hey hey");
+  const apiKey= 'AIzaSyDhGASYUnmjszNIjzQ2Pr58YNc7xekWxWg';
+  const query = req.body.result && req.body.result.parameters && req.body.result.parameters.video ? req.body.result.parameters.video : 'learn software';
+  const reqUrl =encodeURI(`https://www.googleapis.com/youtube/v3/search?key=${apiKey}&q=${query}&order=date&part=snippet&type=video,id&maxResults=3`);
   https.get(reqUrl, (responseFromAPI) => {
     let completeResponse = '';
     responseFromAPI.on('data', (chunk) => {
