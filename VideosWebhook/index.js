@@ -5,6 +5,9 @@ const https = require('https')
 const cors = require('cors');
 const server = express();
 server.use(cors());
+server.use(bodyParser.urlencoded({
+  extended: true
+}));
 server.use(bodyParser.json());
 
 server.post('/getVideoDetails', (req, res) => {
@@ -21,15 +24,16 @@ server.post('/getVideoDetails', (req, res) => {
     responseFromAPI.on('end', () => {
       const videoDetails = JSON.parse(completeResponse);
       let link='https://www.youtube.com/watch?v='
+      let dataToSend = `${link}${videoDetails.items[0].videoId}`;
       return res.json({
-        link1: link+videoDetails.items[0].id.videoId,
-        link2: link+videoDetails.items[1].id.videoId,
-        link3: link+videoDetails.items[2].id.videoId
+        displayText: dataToSend,
+        source: 'get-Video-Details'
       });
     });
   }, (error) => {
     return res.json({
-      link: 'Something went wrong!'
+      displayText: 'something went wrong',
+      source: 'get-Video-Details'
     });
   });
 });
