@@ -25,23 +25,23 @@ server.post('/getVideoDetails', (req, res) => {
       let link='https://www.youtube.com/watch?v=';
       let dataToSend = link+videoDetails.items[0].id.videoId +'\n'+ link+videoDetails.items[1].id.videoId +'\n'+ link+videoDetails.items[2].id.videoId;
       console.log(dataToSend);
-      var speechResponse = {
-        google: {
-          expectUserResponse: true,
-          richResponse: {
-            items: [
-              {
-                simpleResponse: {
-                  textToSpeech: dataToSend
-                }
-              }
-            ]
-          }
-        }
-      };
+      // var speechResponse = {
+      //   google: {
+      //     expectUserResponse: true,
+      //     richResponse: {
+      //       items: [
+      //         {
+      //           simpleResponse: {
+      //             textToSpeech: dataToSend
+      //           }
+      //         }
+      //       ]
+      //     }
+      //   }
+      // };
       return res.json({
-        fulfillmentText: link+videoDetails.items[0].id.videoId,
-        payload: speechResponse,
+        fulfillmentText: dataToSend,
+        // payload: speechResponse,
         speech: dataToSend,
         source: 'get-Video-Details'
       });
