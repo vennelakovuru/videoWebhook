@@ -25,16 +25,30 @@ server.post('/getVideoDetails', (req, res) => {
       let link='https://www.youtube.com/watch?v=';
       let dataToSend = link+videoDetails.items[0].id.videoId;
       console.log(dataToSend);
-      return res.json({
-        fulfillment: {
-          speech: dataToSend,
-          source: "get-Video-Details"
+      var speechResponse = {
+        google: {
+          expectUserResponse: true,
+          richResponse: {
+            items: [
+              {
+                simpleResponse: {
+                  textToSpeech: dataToSend
+                }
+              }
+            ]
+          }
         }
+      };
+      return res.json({
+        fulfillmentText: dataToSend,
+        payload: speechResponse,
+        speech: dataToSend,
+        source: 'get-Video-Details'
       });
     });
   }, (error) => {
-    console.log(error);
     return res.json({
+      speech: 'Something went wrong',
       source: 'get-Video-Details'
     });
   });
