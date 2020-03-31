@@ -40,26 +40,23 @@ server.post('/getVideoDetails', (req, res) => {
       //   }
       // };
 
-      const fullfillementMessages = {
-        "fulfillmentMessages": [
-          {
-            card: {
-              title: "card title",
-              subtitle: "card text",
-              imageUri: link + videoDetails.items[0].snippet.thumbnails.default.url,
-              buttons: [
-                {
-                  text: "button text",
-                  postback: link + videoDetails.items[0].id.videoId
-                }
-              ]
+      const fulfillmentMessages = {
+        card: {
+          title: "card title",
+          subtitle: "card text",
+          imageUri: videoDetails.items[0].snippet.thumbnails.default.url,
+          buttons: [
+            {
+              text: "button text",
+              postback: videoDetails.items[0].id.videoId
             }
-          }
-        ]
-      };
+          ]
+        }
+      }
+
       return res.json({
         fulfillmentText: dataToSend,
-        fulfillmentMessages: fullfillementMessages,
+        fulfillmentMessages: [fulfillmentMessages],
         // payload: speechResponse,
         speech: dataToSend,
         source: 'get-Video-Details'
