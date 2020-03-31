@@ -23,7 +23,7 @@ server.post('/getVideoDetails', (req, res) => {
     responseFromAPI.on('end', () => {
       const videoDetails = JSON.parse(completeResponse);
       let link='https://www.youtube.com/watch?v=';
-      let dataToSend = link+videoDetails.items[0].id.videoId +'\n'+ link+videoDetails.items[1].id.videoId +'\n'+ link+videoDetails.items[2].id.videoId;
+      let dataToSend = link+videoDetails.items[0].id.videoId +","+ link+videoDetails.items[1].id.videoId +","+ link+videoDetails.items[2].id.videoId;
       console.log(dataToSend);
       // var speechResponse = {
       //   google: {
@@ -40,23 +40,23 @@ server.post('/getVideoDetails', (req, res) => {
       //   }
       // };
 
-      const fulfillmentMessages = {
-        card: {
-          title: "card title",
-          subtitle: "card text",
-          imageUri: videoDetails.items[0].snippet.thumbnails.default.url,
-          buttons: [
-            {
-              text: "button text",
-              postback: videoDetails.items[0].id.videoId
-            }
-          ]
-        }
-      }
+      // const fulfillmentMessages = {
+      //   card: {
+      //     title: "card title",
+      //     subtitle: "card text",
+      //     imageUri: videoDetails.items[0].snippet.thumbnails.default.url,
+      //     buttons: [
+      //       {
+      //         text: "button text",
+      //         postback: link+videoDetails.items[0].id.videoId
+      //       }
+      //     ]
+      //   }
+      // }
 
       return res.json({
         fulfillmentText: dataToSend,
-        fulfillmentMessages: [fulfillmentMessages],
+        // fulfillmentMessages: [fulfillmentMessages],
         // payload: speechResponse,
         speech: dataToSend,
         source: 'get-Video-Details'
