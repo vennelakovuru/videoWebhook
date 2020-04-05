@@ -12,6 +12,7 @@ server.use(bodyParser.json());
 
 server.post('/getVideoDetails', (req, res) => {
   const apiKey= 'AIzaSyDhGASYUnmjszNIjzQ2Pr58YNc7xekWxWg';
+  console.log(req);
   const query = req.body.queryResult && req.body.queryResult.parameters && req.body.queryResult.parameters.video ? req.body.queryResult.parameters.video : 'learn software';
   console.log(query);
   const reqUrl =encodeURI(`https://www.googleapis.com/youtube/v3/search?part=snippet&chart=mostPopular&type=video&maxResults=3&order=relevance&relevanceLanguage=en&q=${query}&key=${apiKey}`);
@@ -24,7 +25,6 @@ server.post('/getVideoDetails', (req, res) => {
       const videoDetails = JSON.parse(completeResponse);
       let link='https://www.youtube.com/watch?v=';
       let dataToSend = link+videoDetails.items[0].id.videoId+",  "+link+videoDetails.items[1].id.videoId+",  "+link+videoDetails.items[2].id.videoId;
-      console.log(dataToSend);
       // var speechResponse = {
       //   google: {
       //     expectUserResponse: true,
