@@ -14,7 +14,7 @@ server.post('/getVideoDetails', (req, res) => {
   const apiKey= 'AIzaSyDhGASYUnmjszNIjzQ2Pr58YNc7xekWxWg';
   const query = req.body.queryResult && req.body.queryResult.parameters && req.body.queryResult.parameters.video ? req.body.queryResult.parameters.video : 'learn software';
   console.log(query);
-  const reqUrl =encodeURI(`https://www.googleapis.com/youtube/v3/search?key=${apiKey}&q=${query}&order=date&part=snippet&type=video,id&maxResults=3`);
+  const reqUrl =encodeURI(`https://www.googleapis.com/youtube/v3/search?part=snippet&chart=mostPopular&type=video&maxResults=3&order=relevance&q=${query}&key=${apiKey}`);
   https.get(reqUrl, (responseFromAPI) => {
     let completeResponse = '';
     responseFromAPI.on('data', (chunk) => {
