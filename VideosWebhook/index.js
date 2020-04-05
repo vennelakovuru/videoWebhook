@@ -25,8 +25,9 @@ server.post('/getVideoDetails', (req, res) => {
     responseFromAPI.on('end', () => {
       const videoDetails = JSON.parse(completeResponse);
       let link='https://www.youtube.com/watch?v=';
-      let dataToSend = link+videoDetails.items[0].id.videoId+",  "+link+videoDetails.items[1].id.videoId+",  "+link+videoDetails.items[2].id.videoId;
-      // var speechResponse = {
+      //let dataToSend = link+videoDetails.items[0].id.videoId+",  "+link+videoDetails.items[1].id.videoId+",  "+link+videoDetails.items[2].id.videoId;
+        let dataToSend = `<a href=link+videoDetails.items[0].id.videoId>link+videoDetails.items[0].id.videoId</a>`;
+        // var speechResponse = {
       //   google: {
       //     expectUserResponse: true,
       //     richResponse: {
