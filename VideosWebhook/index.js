@@ -85,7 +85,7 @@ server.post('/getVideoDetails', (req, res) => {
 
             return res.json({
                 fulfillmentText: dataToSend,
-                fulfillmentMessages: [message1,message2,message3],
+                fulfillmentMessages: [{message1},{message2},{message3}],
                 speech: dataToSend,
                 source: 'get-Video-Details'
             });
