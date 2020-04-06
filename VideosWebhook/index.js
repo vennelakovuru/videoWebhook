@@ -54,20 +54,19 @@ server.post('/getVideoDetails', (req, res) => {
             //         ]
             //     }
             // }
-            const fulfillmentMessages =
-            {
-                destinationName: Destination Name,
-                platform: google,
-                type: link_out_chip,
-                url: link + videoDetails.items[0].id.videoId
+            const fulfillmentMessages = {
+                LinkOutSuggestion: {
+                    destinationName: link + videoDetails.items[0].id.videoId,
+                    uri: link + videoDetails.items[0].id.videoId
+                }
             };
 
             return res.json({
-                fulfillment_text: dataToSend,
-                // fulfillmentMessages: [fulfillmentMessages],
+                fulfillmentText: dataToSend,
+                fulfillmentMessages: [fulfillmentMessages],
                 // payload: speechResponse,
-                // speech: dataToSend,
-                // source: 'get-Video-Details'
+                speech: dataToSend,
+                source: 'get-Video-Details'
             });
         });
     }, (error) => {
