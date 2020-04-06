@@ -76,7 +76,14 @@ server.post('/getVideoDetails', (req, res) => {
                         ]
                     }
 
-                }];
+                },
+                {
+                    destinationName: "Destination Name",
+                    platform: "google",
+                    type: "link_out_chip",
+                    url: "http://Url.com"
+                }
+            ];
 
 
             return res.json({
