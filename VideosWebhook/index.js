@@ -43,8 +43,6 @@ server.post('/getVideoDetails', (req, res) => {
 
             const messsage1 =[ {
                 card: {
-                    title: "card title",
-                    subtitle: "card text",
                     imageUri: videoDetails.items[0].snippet.thumbnails.default.url,
                     buttons: [
                         {
@@ -56,8 +54,7 @@ server.post('/getVideoDetails', (req, res) => {
             },
                 {
                     card: {
-                        title: "card title",
-                        subtitle: "card text",
+
                         imageUri: videoDetails.items[1].snippet.thumbnails.default.url,
                         buttons: [
                             {
@@ -71,7 +68,6 @@ server.post('/getVideoDetails', (req, res) => {
                 {
                     card: {
                         imageUri: videoDetails.items[2].snippet.thumbnails.default.url,
-                        url: link + videoDetails.items[2].id.videoId,
                         buttons: [
                             {
                                 text: "Link3",
