@@ -54,6 +54,13 @@ server.post('/getVideoDetails', (req, res) => {
             //         ]
             //     }
             // }
+
+            const payload =
+            {
+                "type": "link",
+                "url": "https://www.google.com",
+                "name": "Go To Google"
+            };
             const fulfillmentMessages = {
                 link_out_suggestion: {
                     destinationName: link + videoDetails.items[0].id.videoId,
@@ -63,8 +70,8 @@ server.post('/getVideoDetails', (req, res) => {
 
             return res.json({
                 fulfillmentText: dataToSend,
-                fulfillmentMessages: [fulfillmentMessages],
-                // payload: speechResponse,
+                // fulfillmentMessages: [fulfillmentMessages],
+                 payload: [payload],
                 speech: dataToSend,
                 source: 'get-Video-Details'
             });
