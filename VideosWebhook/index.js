@@ -63,11 +63,11 @@ server.post('/getVideoDetails', (req, res) => {
             };
 
             return res.json({
-                fulfillmentText: dataToSend,
-                fulfillmentMessages: [fulfillmentMessages],
+                fulfillment_text: dataToSend,
+                // fulfillmentMessages: [fulfillmentMessages],
                 // payload: speechResponse,
-                speech: dataToSend,
-                source: 'get-Video-Details'
+                // speech: dataToSend,
+                // source: 'get-Video-Details'
             });
         });
     }, (error) => {
