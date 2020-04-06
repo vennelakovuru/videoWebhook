@@ -56,7 +56,7 @@ server.post('/getVideoDetails', (req, res) => {
             // }
 
             const fulfillmentMessages = {
-                card: {
+                link_out_chip: {
                     destination_name: link + videoDetails.items[0].id.videoId,
                     uri: link + videoDetails.items[0].id.videoId
                 }
