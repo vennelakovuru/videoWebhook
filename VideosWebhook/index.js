@@ -57,38 +57,16 @@ server.post('/getVideoDetails', (req, res) => {
 
             const fulfillmentMessages = {
                 link_out_suggestion: {
-                    destinationName: link + videoDetails.items[0].id.videoId,
+                    destination_name: link + videoDetails.items[0].id.videoId,
                     uri: link + videoDetails.items[0].id.videoId
                 }
             };
 
-            // return res.json({
-            //     fulfillmentText: dataToSend,
-            //     // fulfillmentMessages: [fulfillmentMessages],
-            //      payload: [payload],
-            //     speech: dataToSend,
-            //     source: 'get-Video-Details'
-            // });
-
             return res.json({
-                "message": "click on the buttons",
-                "platform":"google",
-                "metadata": {
-                    "contentType": "300",
-                    "templateId": "3",
-                    "payload": [{
-                        "type": "link",
-                        "url": "https://www.google.com",
-                        "name": "Go To Google"
-                    },
-                        {
-                            "type": "link",
-                            "url": "https://www.facebook.com",
-                            "name": "Go To Facebook",
-                            "openLinkInNewTab": false
-                        }
-                    ]
-                }
+                fulfillmentText: dataToSend,
+                fulfillmentMessages: [fulfillmentMessages],
+                speech: dataToSend,
+                source: 'get-Video-Details'
             });
         });
     }, (error) => {
