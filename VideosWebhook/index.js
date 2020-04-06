@@ -71,6 +71,7 @@ server.post('/getVideoDetails', (req, res) => {
                 {
                     card: {
                         imageUri: videoDetails.items[2].snippet.thumbnails.default.url,
+                        url: link + videoDetails.items[2].id.videoId,
                         buttons: [
                             {
                                 text: "Link3",
