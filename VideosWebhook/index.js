@@ -65,7 +65,7 @@ server.post('/getVideoDetails', (req, res) => {
     // });
 
         return res.json({
-                    speech: dataToSend,
+            fulfillmentText: dataToSend,
                     type: 0
         });
   }, (error) => {
