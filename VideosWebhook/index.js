@@ -57,6 +57,12 @@ server.post('/getVideoDetails', (req, res) => {
 
       return res.json({
         fulfillmentText: dataToSend,
+          messages: [
+        {
+            type: "link_out_chip",
+            url: "http://Url.com"
+        }
+    ],
         // fulfillmentMessages: [fulfillmentMessages],
         // payload: speechResponse,
         speech: dataToSend,
