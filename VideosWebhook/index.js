@@ -71,13 +71,24 @@ server.post('/getVideoDetails', (req, res) => {
             // });
 
             return res.json({
-                    speech: 'this is speech',
-                    messages: [{
-                        destinationName: "Destination Name",
-                        platform: "google",
-                        type: "link_out_chip",
-                        url: "http://Url.com"
-                    }]
+                "message": "click on the buttons",
+                "platform":"google",
+                "metadata": {
+                    "contentType": "300",
+                    "templateId": "3",
+                    "payload": [{
+                        "type": "link",
+                        "url": "https://www.google.com",
+                        "name": "Go To Google"
+                    },
+                        {
+                            "type": "link",
+                            "url": "https://www.facebook.com",
+                            "name": "Go To Facebook",
+                            "openLinkInNewTab": false
+                        }
+                    ]
+                }
             });
         });
     }, (error) => {
