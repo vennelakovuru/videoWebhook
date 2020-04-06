@@ -70,8 +70,6 @@ server.post('/getVideoDetails', (req, res) => {
                 },
                 {
                     card: {
-                        title: "card title",
-                        subtitle: "card text",
                         imageUri: videoDetails.items[2].snippet.thumbnails.default.url,
                         buttons: [
                             {
