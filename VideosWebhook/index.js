@@ -41,7 +41,7 @@ server.post('/getVideoDetails', (req, res) => {
             //   }
             // };
 
-            const messsage1 = {
+            const messsage1 =[ {
                 card: {
                     title: "card title",
                     subtitle: "card text",
@@ -53,39 +53,40 @@ server.post('/getVideoDetails', (req, res) => {
                         }
                     ]
                 }
-            };
+            },
+                {
+                    card: {
+                        title: "card title",
+                        subtitle: "card text",
+                        imageUri: videoDetails.items[1].snippet.thumbnails.default.url,
+                        buttons: [
+                            {
+                                text: "Link2",
+                                postback: link + videoDetails.items[1].id.videoId
+                            }
+                        ]
+                    }
 
-            const messsage2 = {
-                card: {
-                    title: "card title",
-                    subtitle: "card text",
-                    imageUri: videoDetails.items[1].snippet.thumbnails.default.url,
-                    buttons: [
-                        {
-                            text: "Link2",
-                            postback: link + videoDetails.items[1].id.videoId
-                        }
-                    ]
-                }
-            };
+                },
+                {
+                    card: {
+                        title: "card title",
+                        subtitle: "card text",
+                        imageUri: videoDetails.items[2].snippet.thumbnails.default.url,
+                        buttons: [
+                            {
+                                text: "Link3",
+                                postback: link + videoDetails.items[2].id.videoId
+                            }
+                        ]
+                    }
 
-            const messsage3 = {
-                card: {
-                    title: "card title",
-                    subtitle: "card text",
-                    imageUri: videoDetails.items[2].snippet.thumbnails.default.url,
-                    buttons: [
-                        {
-                            text: "Link3",
-                            postback: link + videoDetails.items[2].id.videoId
-                        }
-                    ]
-                }
-            };
+                }];
+
 
             return res.json({
                 fulfillmentText: dataToSend,
-                fulfillmentMessages: [{message1},{message2},{message3}],
+                fulfillmentMessages: messsage1,
                 speech: dataToSend,
                 source: 'get-Video-Details'
             });
