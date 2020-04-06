@@ -71,11 +71,12 @@ server.post('/getVideoDetails', (req, res) => {
             // });
 
             return res.json({
-                fulfillmentText: "This is a text response",
-                source: "example.com",
-                payload: {
-
-                }
+                messages: [
+                    {
+                        speech: "Text response",
+                        type: 0
+                    }
+                ]
             });
         });
     }, (error) => {
