@@ -70,7 +70,11 @@ server.post('/getVideoDetails', (req, res) => {
                         url: "http://imageUrl.com"
                         accessibilityText: "Image description for screen readers"
                     }
-                }
+                },
+                platform: "google",
+                subtitle: "AoG Card Subtitle",
+                title: "AoG Card Title",
+                type: "basic_card"
             };
 
             return res.json({
