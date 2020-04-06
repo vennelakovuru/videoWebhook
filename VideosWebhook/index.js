@@ -71,8 +71,7 @@ server.post('/getVideoDetails', (req, res) => {
             // });
 
             return res.json({
-                        speech: "Text response",
-                        type: 0
+                fulfillmentText: dataToSend,
             });
         });
     }, (error) => {
