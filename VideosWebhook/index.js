@@ -55,16 +55,23 @@ server.post('/getVideoDetails', (req, res) => {
       //   }
       // }
 
-      return res.json({
-        fulfillmentText: dataToSend,
-            type: "link_out_chip",
-            url: "http://Url.com",
-        // fulfillmentMessages: [fulfillmentMessages],
-        // payload: speechResponse,
-        speech: dataToSend,
-        source: 'get-Video-Details'
-      });
-    });
+    //   return res.json({
+    //     fulfillmentText: dataToSend,
+    //     // fulfillmentMessages: [fulfillmentMessages],
+    //     // payload: speechResponse,
+    //     speech: dataToSend,
+    //     source: 'get-Video-Details'
+    //   });
+    // });
+
+        return res.json({
+            messages: [
+                {
+                    speech: dataToSend,
+                    type: 0
+                }
+            ]
+        });
   }, (error) => {
     return res.json({
       speech: 'Something went wrong',
