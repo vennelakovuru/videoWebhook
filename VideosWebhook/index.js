@@ -62,12 +62,20 @@ server.post('/getVideoDetails', (req, res) => {
                 }
             };
 
+            // return res.json({
+            //     fulfillmentText: dataToSend,
+            //     // fulfillmentMessages: [fulfillmentMessages],
+            //      payload: [payload],
+            //     speech: dataToSend,
+            //     source: 'get-Video-Details'
+            // });
+
             return res.json({
-                fulfillmentText: dataToSend,
-                // fulfillmentMessages: [fulfillmentMessages],
-                 payload: [payload],
-                speech: dataToSend,
-                source: 'get-Video-Details'
+                "fulfillmentText": "This is a text response",
+                "source": "example.com",
+                "payload":[ {
+
+                }]
             });
         });
     }, (error) => {
