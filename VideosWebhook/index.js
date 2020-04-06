@@ -56,7 +56,7 @@ server.post('/getVideoDetails', (req, res) => {
             // }
 
             const fulfillmentMessages = {
-                link_out_suggestion: {
+                card: {
                     destination_name: link + videoDetails.items[0].id.videoId,
                     uri: link + videoDetails.items[0].id.videoId
                 }
