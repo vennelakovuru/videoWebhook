@@ -41,19 +41,26 @@ server.post('/getVideoDetails', (req, res) => {
             //   }
             // };
 
-            const fulfillmentMessages = {
-                card: {
-                    title: "card title",
-                    subtitle: "card text",
-                    imageUri: videoDetails.items[0].snippet.thumbnails.default.url,
-                    buttons: [
-                        {
-                            text: "Link1",
-                            postback: link + videoDetails.items[0].id.videoId
-                        }
-                    ]
-                }
-            }
+            // const fulfillmentMessages = {
+            //     card: {
+            //         title: "card title",
+            //         subtitle: "card text",
+            //         imageUri: videoDetails.items[0].snippet.thumbnails.default.url,
+            //         buttons: [
+            //             {
+            //                 text: "Link1",
+            //                 postback: link + videoDetails.items[0].id.videoId
+            //             }
+            //         ]
+            //     }
+            // }
+            const fulfillmentMessages =
+            {
+                destinationName: Destination Name,
+                platform: google,
+                type: link_out_chip,
+                url: link + videoDetails.items[0].id.videoId
+            };
 
             return res.json({
                 fulfillmentText: dataToSend,
