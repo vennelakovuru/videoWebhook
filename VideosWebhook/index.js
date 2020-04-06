@@ -71,7 +71,6 @@ server.post('/getVideoDetails', (req, res) => {
             // });
 
             return res.json({
-                fulfillment: {
                     speech: 'this is speech',
                     messages: [{
                         destinationName: "Destination Name",
@@ -79,7 +78,6 @@ server.post('/getVideoDetails', (req, res) => {
                         type: "link_out_chip",
                         url: "http://Url.com"
                     }]
-                }
             });
         });
     }, (error) => {
