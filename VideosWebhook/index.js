@@ -41,7 +41,7 @@ server.post('/getVideoDetails', (req, res) => {
             //   }
             // };
 
-            const fulfillmentMessages = {
+            const messsage1 = {
                 card: {
                     title: "card title",
                     subtitle: "card text",
@@ -53,11 +53,39 @@ server.post('/getVideoDetails', (req, res) => {
                         }
                     ]
                 }
-            }
+            };
+
+            const messsage2 = {
+                card: {
+                    title: "card title",
+                    subtitle: "card text",
+                    imageUri: videoDetails.items[1].snippet.thumbnails.default.url,
+                    buttons: [
+                        {
+                            text: "Link2",
+                            postback: link + videoDetails.items[1].id.videoId
+                        }
+                    ]
+                }
+            };
+
+            const messsage3 = {
+                card: {
+                    title: "card title",
+                    subtitle: "card text",
+                    imageUri: videoDetails.items[2].snippet.thumbnails.default.url,
+                    buttons: [
+                        {
+                            text: "Link3",
+                            postback: link + videoDetails.items[2].id.videoId
+                        }
+                    ]
+                }
+            };
 
             return res.json({
                 fulfillmentText: dataToSend,
-                fulfillmentMessages: [fulfillmentMessages],
+                fulfillmentMessages: [message1,message2,message3],
                 speech: dataToSend,
                 source: 'get-Video-Details'
             });
