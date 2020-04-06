@@ -56,9 +56,20 @@ server.post('/getVideoDetails', (req, res) => {
             // }
 
             const fulfillmentMessages = {
-                link_out_chip: {
-                    destination_name: link + videoDetails.items[0].id.videoId,
-                    uri: link + videoDetails.items[0].id.videoId
+                card: {
+                    buttons: [
+                        {
+                            openUrlAction: {
+                                url: "https://linkUrl.com"
+                            },
+                            title: "AoG Card Link title"
+                        }
+                    ],
+                    formattedText: "AoG Card Description",
+                    image: {
+                        url: "http://imageUrl.com"
+                        accessibilityText: "Image description for screen readers"
+                    }
                 }
             };
 
