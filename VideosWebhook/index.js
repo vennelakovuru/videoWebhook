@@ -72,10 +72,12 @@ server.post('/getVideoDetails', (req, res) => {
 
             return res.json({
                 fulfillmentText: {
-                    destinationName: "Destination Name",
-                    platform: "google",
-                    type: "link_out_chip",
-                    url: "http://Url.com"
+                    messages: [{
+                        destinationName: "Destination Name",
+                        platform: "google",
+                        type: "link_out_chip",
+                        url: "http://Url.com"
+                    }]
                 }
             });
         });
