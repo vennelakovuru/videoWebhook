@@ -71,7 +71,8 @@ server.post('/getVideoDetails', (req, res) => {
             // });
 
             return res.json({
-                fulfillmentText: {
+                fulfillment: {
+                    speech: 'this is speech',
                     messages: [{
                         destinationName: "Destination Name",
                         platform: "google",
