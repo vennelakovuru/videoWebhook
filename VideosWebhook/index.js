@@ -57,9 +57,9 @@ server.post('/getVideoDetails', (req, res) => {
 
             const payload =
             {
-                "type": "link",
-                "url": "https://www.google.com",
-                "name": "Go To Google"
+                type: "link",
+                url: "https://www.google.com",
+                name: "Go To Google"
             };
             const fulfillmentMessages = {
                 link_out_suggestion: {
