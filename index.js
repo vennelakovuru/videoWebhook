@@ -115,7 +115,7 @@ server.post('/web-hook', function (req, response, next) {
             });
         });
         while(linksData === undefined || videoData === undefined) {
-            for(let i=0;i<=1000000;i++){
+            for(let i=0;i<=10000;i++){
 
             }
         }
