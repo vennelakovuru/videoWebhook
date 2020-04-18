@@ -85,21 +85,82 @@ server.post('/getVideoDetails', (req, res) => {
 server.post('/web-hook', function (req, response, next) {
     var linksData;
     var videoData;
-    const apiKey = 'AIzaSyDhGASYUnmjszNIjzQ2Pr58YNc7xekWxWg';
-    const query = req.body.queryResult.queryText;
-    const linkUrl = encodeURI(`https://www.googleapis.com/customsearch/v1?&key=${apiKey}&cx=017576662512468239146:omuauf_lfve&q=${query}&num=3&hl=en`);
-    https.get(linkUrl, (responseFromAPI) => {
-        let completeResponse = '';
-        responseFromAPI.on('data', (chunk) => {
-            completeResponse += chunk;
-        });
-        responseFromAPI.on('end', () => {
-            const linkDetails = JSON.parse(completeResponse);
-            console.log('++++++++++++++++++++++linkdetails',linkDetails);
-            linksData = linkDetails.items[0].link + "," + linkDetails.items[0].link + "," + linkDetails.items[0].link;
-            console.log('++++++++++++++++++++++++linksdata',linksData);
-        });
 
+    (async function () {
+        // wait to http request to finish
+        linksData= await makeSynchronousRequestLinks();
+
+        // below code will be executed after http request is finished
+        console.log(linksData);
+    })();
+
+    (async function () {
+        // wait to http request to finish
+        videoData= await makeSynchronousVideoLinks();
+
+        // below code will be executed after http request is finished
+        console.log(videoData);
+    })();
+
+
+        console.log('----------------------------------------------------links');
+        console.log(linksData);
+        console.log('----------------------------------------------------videos');
+        console.log(videoData);
+        console.log('----------------------------------------------------links');
+        return response.json({
+            fulfillmentText: linksData + ',' + videoData,
+            speech: linksData + ',' + videoData,
+            source: 'get-webhook-details'
+        });
+});
+
+function getLinkPromise() {
+    return new Promise((resolve, reject) => {
+        var linksData;
+        const apiKey = 'AIzaSyDhGASYUnmjszNIjzQ2Pr58YNc7xekWxWg';
+        const query = req.body.queryResult.queryText;
+        const linkUrl = encodeURI(`https://www.googleapis.com/customsearch/v1?&key=${apiKey}&cx=017576662512468239146:omuauf_lfve&q=${query}&num=3&hl=en`);
+        https.get(linkUrl, (responseFromAPI) => {
+            let completeResponse = '';
+            responseFromAPI.on('data', (chunk) => {
+                completeResponse += chunk;
+            });
+            responseFromAPI.on('end', () => {
+                const linkDetails = JSON.parse(completeResponse);
+                console.log('++++++++++++++++++++++linkdetails',linkDetails);
+                linksData = linkDetails.items[0].link + "," + linkDetails.items[0].link + "," + linkDetails.items[0].link;
+                console.log('++++++++++++++++++++++++linksdata',linksData);
+                resolve(linksData);
+            });
+
+            responseFromAPI.on('error', (error) => {
+                reject(error);
+            });
+        });
+    });
+}
+
+async function makeSynchronousRequestLinks() {
+    try {
+        let http_promise = getLinkPromise();
+        let response_body = await http_promise;
+
+        // holds response from server that is passed when Promise is resolved
+
+        return response_body;
+    }
+    catch(error) {
+        // Promise rejected
+        console.log(error);
+    }
+}
+
+function getVideoPromise() {
+    return new Promise((resolve, reject) => {
+        var linksData;
+        const apiKey = 'AIzaSyDhGASYUnmjszNIjzQ2Pr58YNc7xekWxWg';
+        const query = req.body.queryResult.queryText;
         const videoUrl = encodeURI(`https://www.googleapis.com/youtube/v3/search?part=snippet&chart=mostPopular&type=video&maxResults=3&order=relevance&relevanceLanguage=en&q=${query}&key=${apiKey}`);
         https.get(videoUrl, (responseFromAPI) => {
             let completeResponse = '';
@@ -114,23 +175,24 @@ server.post('/web-hook', function (req, response, next) {
                 console.log('----------------------------videodata',videoData);
             });
         });
-
-        for(let i=0;i<1000900000;i++){
-
-        }
-
-        console.log('----------------------------------------------------links');
-        console.log(linksData);
-        console.log('----------------------------------------------------videos');
-        console.log(videoData);
-        console.log('----------------------------------------------------links');
-        return response.json({
-            fulfillmentText: linksData + ',' + videoData,
-            speech: linksData + ',' + videoData,
-            source: 'get-webhook-details'
-        });
     });
-});
+}
+
+async function makeSynchronousVideoLinks() {
+    try {
+        let http_promise = getVideoPromise();
+        let response_body = await http_promise;
+
+        // holds response from server that is passed when Promise is resolved
+
+        return response_body;
+    }
+    catch(error) {
+        // Promise rejected
+        console.log(error);
+    }
+}
+
 
 server.listen((process.env.PORT || 8333), () => {
     console.log("Server is up and running...");
