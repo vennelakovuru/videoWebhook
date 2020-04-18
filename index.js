@@ -65,9 +65,7 @@ server.post('/web-hook', function (req, response, next) {
 
                     }
                 ];
-                return res.json({
-                    response : dataToSend
-                });
+                return res(dataToSend);
                 // return res.json({
                 //     fulfillmentText: dataToSend,
                 //     fulfillmentMessages: messsage1,
@@ -96,9 +94,7 @@ server.post('/web-hook', function (req, response, next) {
             responseFromAPI.on('end', () => {
                 const linkDetails = JSON.parse(completeResponse);
                 let dataToSend = linkDetails.items[0].link + "," + linkDetails.items[0].link + "," + linkDetails.items[0].link;
-                return res.json({
-                    response : dataToSend
-                });
+                return res(dataToSend);
             });
         }, (error) => {
             return res.json({
@@ -111,9 +107,10 @@ server.post('/web-hook', function (req, response, next) {
     //do your process here
     console.log("responseVideos",responseVideos);
     console.log("responseLinks", responseLinks);
-    console.log("json response final",JSON.stringify([{response: responseLinks}, {response: responseVideos}]));
     return response.json({
-        'fulfillmentText': JSON.stringify([{response: responseLinks}, {response: responseVideos}])
+        fulfillmentText: responseVideos+','+responseLinks,
+        speech: responseVideos+','+responseLinks,
+        source: 'get-webhook-details'
     });
 });
 
