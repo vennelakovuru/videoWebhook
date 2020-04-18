@@ -88,7 +88,7 @@ server.post('/web-hook', function (req, response, next) {
 
     (async function () {
         // wait to http request to finish
-        linksData= await makeSynchronousRequestLinks();
+        linksData= await makeSynchronousRequestLinks(req);
 
         // below code will be executed after http request is finished
         console.log(linksData);
@@ -96,7 +96,7 @@ server.post('/web-hook', function (req, response, next) {
 
     (async function () {
         // wait to http request to finish
-        videoData= await makeSynchronousVideoLinks();
+        videoData= await makeSynchronousVideoLinks(req);
 
         // below code will be executed after http request is finished
         console.log(videoData);
@@ -115,7 +115,7 @@ server.post('/web-hook', function (req, response, next) {
         });
 });
 
-function getLinkPromise() {
+function getLinkPromise(req) {
     return new Promise((resolve, reject) => {
         var linksData;
         const apiKey = 'AIzaSyDhGASYUnmjszNIjzQ2Pr58YNc7xekWxWg';
@@ -141,9 +141,9 @@ function getLinkPromise() {
     });
 }
 
-async function makeSynchronousRequestLinks() {
+async function makeSynchronousRequestLinks(req) {
     try {
-        let http_promise = getLinkPromise();
+        let http_promise = getLinkPromise(req);
         let response_body = await http_promise;
 
         // holds response from server that is passed when Promise is resolved
@@ -156,7 +156,7 @@ async function makeSynchronousRequestLinks() {
     }
 }
 
-function getVideoPromise() {
+function getVideoPromise(req) {
     return new Promise((resolve, reject) => {
         var linksData;
         const apiKey = 'AIzaSyDhGASYUnmjszNIjzQ2Pr58YNc7xekWxWg';
@@ -180,7 +180,7 @@ function getVideoPromise() {
 
 async function makeSynchronousVideoLinks() {
     try {
-        let http_promise = getVideoPromise();
+        let http_promise = getVideoPromise(req);
         let response_body = await http_promise;
 
         // holds response from server that is passed when Promise is resolved
