@@ -65,7 +65,7 @@ server.post('/web-hook', function (req, response, next) {
 
                     }
                 ];
-                return res(dataToSend);
+                return dataToSend;
                 // return res.json({
                 //     fulfillmentText: dataToSend,
                 //     fulfillmentMessages: messsage1,
@@ -94,7 +94,7 @@ server.post('/web-hook', function (req, response, next) {
             responseFromAPI.on('end', () => {
                 const linkDetails = JSON.parse(completeResponse);
                 let dataToSend = linkDetails.items[0].link + "," + linkDetails.items[0].link + "," + linkDetails.items[0].link;
-                return res(dataToSend);
+                return dataToSend;
             });
         }, (error) => {
             return res.json({
