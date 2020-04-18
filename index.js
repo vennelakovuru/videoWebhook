@@ -94,13 +94,13 @@ server.post('/web-hook', function (req, response, next) {
         console.log(linksData);
     })();
 
-    (async function () {
+    /*(async function () {
         // wait to http request to finish
         videoData= await makeSynchronousVideoLinks(req);
 
         // below code will be executed after http request is finished
         console.log(videoData);
-    })();
+    })();*/
 
 
         console.log('----------------------------------------------------links');
