@@ -95,7 +95,9 @@ server.post('/web-hook', function (req, response, next) {
         });
         responseFromAPI.on('end', () => {
             const linkDetails = JSON.parse(completeResponse);
+            console.log('++++++++++++++++++++++linkdetails',linkDetails);
             linksData = linkDetails.items[0].link + "," + linkDetails.items[0].link + "," + linkDetails.items[0].link;
+            console.log('++++++++++++++++++++++++linksdata',linksData);
         });
 
         const videoUrl = encodeURI(`https://www.googleapis.com/youtube/v3/search?part=snippet&chart=mostPopular&type=video&maxResults=3&order=relevance&relevanceLanguage=en&q=${query}&key=${apiKey}`);
@@ -106,13 +108,15 @@ server.post('/web-hook', function (req, response, next) {
             });
             responseFromAPI.on('end', () => {
                 const videoDetails = JSON.parse(completeResponse);
+                console.log('----------------------------videodetails',videoDetails);
                 let link = 'https://www.youtube.com/embed/';
                 videoData = link + videoDetails.items[0].id.videoId + "," + link + videoDetails.items[1].id.videoId + "," + link + videoDetails.items[2].id.videoId;
+                console.log('----------------------------videodata',videoData);
             });
         });
         while(linksData === undefined || videoData === undefined) {
             for(let i=0;i<=1000000;i++){
-                
+
             }
         }
         console.log('----------------------------------------------------links');
