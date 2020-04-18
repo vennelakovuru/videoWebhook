@@ -111,7 +111,9 @@ server.post('/web-hook', function (req, response, next) {
             });
         });
         while(linksData === undefined || videoData === undefined) {
-            require('deasync').runLoopOnce();
+            for(let i=0;i<=1000000;i++){
+                
+            }
         }
         console.log('----------------------------------------------------links');
         console.log(linksData);
