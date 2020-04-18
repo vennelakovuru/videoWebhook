@@ -114,11 +114,7 @@ server.post('/web-hook', function (req, response, next) {
                 console.log('----------------------------videodata',videoData);
             });
         });
-        while(linksData === undefined || videoData === undefined) {
-            for(let i=0;i<=100;i++){
 
-            }
-        }
         console.log('----------------------------------------------------links');
         console.log(linksData);
         console.log('----------------------------------------------------videos');
