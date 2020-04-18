@@ -178,7 +178,7 @@ function getVideoPromise(req) {
     });
 }
 
-async function makeSynchronousVideoLinks() {
+async function makeSynchronousVideoLinks(req) {
     try {
         let http_promise = getVideoPromise(req);
         let response_body = await http_promise;
