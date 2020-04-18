@@ -110,8 +110,13 @@ server.post('/web-hook', function (req, response, next) {
                 videoData = link + videoDetails.items[0].id.videoId + "," + link + videoDetails.items[1].id.videoId + "," + link + videoDetails.items[2].id.videoId;
             });
         });
+        console.log('----------------------------------------------------links');
+        console.log(linksData);
+        console.log('----------------------------------------------------videos');
+        console.log(videoData);
+        console.log('----------------------------------------------------links');
         return response.json({
-            fulfillmentText: linksData + ',' + videoData,
+            fulfillmentText: 'vennela',
             speech: linksData + ',' + videoData,
             source: 'get-webhook-details'
         });
