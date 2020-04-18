@@ -10,9 +10,7 @@ server.use(bodyParser.urlencoded({
 }));
 server.use(bodyParser.json());
 
-server.post('/web-hook', function (req, response, next) {
-
-    let responseVideos = server.post('/getVideoDetails', (req, res) => {
+server.post('/getVideoDetails', (req, res) => {
         const apiKey = 'AIzaSyDhGASYUnmjszNIjzQ2Pr58YNc7xekWxWg';
         const query = req.body.queryResult.queryText;
         console.log(req.body.queryResult);
@@ -65,7 +63,7 @@ server.post('/web-hook', function (req, response, next) {
 
                     }
                 ];
-                return dataToSend;
+                return res.send(dataToSend);
                 // return res.json({
                 //     fulfillmentText: dataToSend,
                 //     fulfillmentMessages: messsage1,
@@ -79,38 +77,44 @@ server.post('/web-hook', function (req, response, next) {
                 source: 'get-Video-Details'
             });
         });
-    });
+    }
+);
 
 
-    let responseLinks = server.post('/getLinkDetails', (req, res) => {
-        const apiKey = 'AIzaSyDhGASYUnmjszNIjzQ2Pr58YNc7xekWxWg';
-        const query = req.body.queryResult.queryText;
-        const reqUrl = encodeURI(`https://www.googleapis.com/customsearch/v1?&key=${apiKey}&cx=017576662512468239146:omuauf_lfve&q=${query}&num=3&hl=en`);
-        https.get(reqUrl, (responseFromAPI) => {
+//do your process here
+server.post('/web-hook', function (req, response, next) {
+    var linksData;
+    var videoData;
+    const apiKey = 'AIzaSyDhGASYUnmjszNIjzQ2Pr58YNc7xekWxWg';
+    const query = req.body.queryResult.queryText;
+    const linkUrl = encodeURI(`https://www.googleapis.com/customsearch/v1?&key=${apiKey}&cx=017576662512468239146:omuauf_lfve&q=${query}&num=3&hl=en`);
+    https.get(linkUrl, (responseFromAPI) => {
+        let completeResponse = '';
+        responseFromAPI.on('data', (chunk) => {
+            completeResponse += chunk;
+        });
+        responseFromAPI.on('end', () => {
+            const linkDetails = JSON.parse(completeResponse);
+            linksData = linkDetails.items[0].link + "," + linkDetails.items[0].link + "," + linkDetails.items[0].link;
+        });
+
+        const videoUrl = encodeURI(`https://www.googleapis.com/youtube/v3/search?part=snippet&chart=mostPopular&type=video&maxResults=3&order=relevance&relevanceLanguage=en&q=${query}&key=${apiKey}`);
+        https.get(videoUrl, (responseFromAPI) => {
             let completeResponse = '';
             responseFromAPI.on('data', (chunk) => {
                 completeResponse += chunk;
             });
             responseFromAPI.on('end', () => {
-                const linkDetails = JSON.parse(completeResponse);
-                let dataToSend = linkDetails.items[0].link + "," + linkDetails.items[0].link + "," + linkDetails.items[0].link;
-                return dataToSend;
-            });
-        }, (error) => {
-            return res.json({
-                speech: 'Something went wrong',
-                source: 'get-link-Details'
+                const videoDetails = JSON.parse(completeResponse);
+                let link = 'https://www.youtube.com/embed/';
+                videoData = link + videoDetails.items[0].id.videoId + "," + link + videoDetails.items[1].id.videoId + "," + link + videoDetails.items[2].id.videoId;
             });
         });
-    });
-
-    //do your process here
-    console.log("responseVideos",responseVideos);
-    console.log("responseLinks", responseLinks);
-    return response.json({
-        fulfillmentText: responseVideos+','+responseLinks,
-        speech: responseVideos+','+responseLinks,
-        source: 'get-webhook-details'
+        return response.json({
+            fulfillmentText: linksData + ',' + videoData,
+            speech: linksData + ',' + videoData,
+            source: 'get-webhook-details'
+        });
     });
 });
 
