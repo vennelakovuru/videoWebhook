@@ -20,20 +20,39 @@ server.post('/web-hook', function (req, response, next) {
     const query = req.body.queryResult.queryText;
     const videoUrl = encodeURI(`https://www.googleapis.com/youtube/v3/search?part=snippet&chart=mostPopular&type=video&maxResults=3&order=relevance&relevanceLanguage=en&q=${query}&key=${apiKey}`);
     const linkUrl = encodeURI(`https://www.googleapis.com/customsearch/v1?&key=${apiKey}&cx=017576662512468239146:omuauf_lfve&q=${query}&num=3&hl=en`);
-    var videoRes;
-    var linkRes;
     axios.all([
         https.get(videoUrl),
         https.get(linkUrl)
     ]).then(axios.spread((videoRes, linkRes) => {
-        console.log(videoRes, linkRes);
+        let linkResponse = '';
+        linkRes.on('data', (chunk) => {
+            linkResponse += chunk;
+        });
+        linkRes.on('end', () => {
+            const linkDetails = JSON.parse(linkResponse);
+            linksData = linkDetails.items[0].link + "," + linkDetails.items[0].link + "," + linkDetails.items[0].link;
+        });
+
+        let videoResponse = '';
+        linkRes.on('data', (chunk) => {
+            videoResponse += chunk;
+        });
+        linkRes.on('end', () => {
+            const videoDetails = JSON.parse(videoResponse);
+            let link = 'https://www.youtube.com/embed/';
+            videoData = link + videoDetails.items[0].id.videoId + "," + link + videoDetails.items[1].id.videoId + "," + link + videoDetails.items[2].id.videoId;
+        });
+        console.log('---------------------------------------');
+        console.log(linksData, videoData);
+        console.log('---------------------------------------');
+
+        return response.json({
+            fulfillmentText: linksData + ',' + videoData,
+            speech: linksData + ',' + videoData,
+            source: 'get-webhook-details'
+        });
     }));
 
-    return response.json({
-        fulfillmentText: videoRes + ',' + linkRes,
-        speech: linksData + ',' + videoData,
-        source: 'get-webhook-details'
-    });
 });
 
 server.listen((process.env.PORT || 8333), () => {
