@@ -81,6 +81,11 @@ server.post('/web-hook', function (req, response, next) {
             linksData = linkDetails.items[0].link + "," + linkDetails.items[0].link + "," + linkDetails.items[0].link;
             console.log(linksData);
             console.log('-------------------');
+            const videoResponse = JSON.stringify(videoRes.data)
+            const videoDetails = JSON.parse(videoResponse);
+            let link = 'https://www.youtube.com/embed/';
+            videoData = link + videoDetails.items[0].id.videoId + "," + link + videoDetails.items[1].id.videoId + "," + link + videoDetails.items[2].id.videoId;
+            console.log(videoData);
         }));
 
 
