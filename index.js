@@ -59,11 +59,11 @@ server.post('/web-hook', function (req, response, next) {
 
     axios.get(linkUrl)
         .then(function (linkRes) {
-            console.log(linkRes);
+            console.log('+++++++++++++++++++++++++++=',linkRes);
         })
         .get(videoUrl)
         .then(function (videoRes) {
-            console.log(videoRes);
+            console.log('----------------------'+videoRes);
         })
         .catch(function (e) {
 
