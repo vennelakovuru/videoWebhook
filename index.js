@@ -57,17 +57,28 @@ server.post('/web-hook', function (req, response, next) {
     //     });
     // }));
 
-    axios.get(linkUrl)
-        .then(function (linkRes) {
-            console.log('+++++++++++++++++++++++++++=',linkRes);
-        })
-        .get(videoUrl)
-        .then(function (videoRes) {
-            console.log('----------------------'+videoRes);
-        })
-        .catch(function (e) {
+    // axios.get(linkUrl)
+    //     .then(function (linkRes) {
+    //         console.log('+++++++++++++++++++++++++++=',linkRes);
+    //     })
+    //     .get(videoUrl)
+    //     .then(function (videoRes) {
+    //         console.log('----------------------'+videoRes);
+    //     })
+    //     .catch(function (e) {
+    //
+    //     })
 
-        })
+    axios.all([
+        axios.get(`https://www.googleapis.com/youtube/v3/search?part=snippet&chart=mostPopular&type=video&maxResults=3&order=relevance&relevanceLanguage=en&q=${query}&key=${apiKey}`),
+        axios.get(`https://www.googleapis.com/customsearch/v1?&key=${apiKey}&cx=017576662512468239146:omuauf_lfve&q=${query}&num=3&hl=en`)
+    ])
+        .then(axios.spread((videoRes, linkRes) => {
+            // do something with both responses
+            console.log('+++++++++++++++++++++++++++=',videoRes);
+            console.log('-------------------',linkRes);
+        }));
+
 
 
 });
