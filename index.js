@@ -31,7 +31,7 @@ server.post('/web-hook', function (req, response, next) {
             // do something with both responses
             const linkResponse = JSON.stringify(linkRes.data)
             const linkDetails = JSON.parse(linkResponse);
-            linksData = linkDetails.items[0].link + "," + linkDetails.items[0].link + "," + linkDetails.items[0].link;
+            linksData = linkDetails.items[0].link + "," + linkDetails.items[1].link + "," + linkDetails.items[2].link;
             console.log('linkdata', linksData);
             const videoResponse = JSON.stringify(videoRes.data)
             const videoDetails = JSON.parse(videoResponse);
@@ -44,7 +44,7 @@ server.post('/web-hook', function (req, response, next) {
                 speech: linksData + ',' + videoData,
                 source: 'get-webhook-details'
             });
-            
+
         }));
 });
 
