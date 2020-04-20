@@ -24,7 +24,7 @@ server.post('/web-hook', function (req, response, next) {
         https.get(linkUrl),
         https.get(videoUrl)
     ]).then(axios.spread((linkRes, videoRes) => {
-        console.log(linkRes);
+        console.log(linkRes.items[0].link);
         let linkResponse = '';
         linkRes.on('data', (chunk) => {
             linkResponse += chunk;
