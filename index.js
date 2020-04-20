@@ -75,10 +75,17 @@ server.post('/web-hook', function (req, response, next) {
     ])
         .then(axios.spread((videoRes, linkRes) => {
             // do something with both responses
-            console.log('+++++++++++++++++++++++++++=');
-            console.log(videoRes.items[0].id.videoId)
+            console.log('+++++++++++++++++++++++++++');
+            let completeResponse = '';
+            linkRes.on('data', (chunk) => {
+                completeResponse += chunk;
+            });
+            linkRes.on('end', () => {
+                const linkDetails = JSON.parse(completeResponse);
+                linksData = linkDetails.items[0].link + "," + linkDetails.items[0].link + "," + linkDetails.items[0].link;
+            });
+            console.log(linksData);
             console.log('-------------------');
-            console.log(linkRes.items[0].link)
         }));
 
 
