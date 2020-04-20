@@ -78,18 +78,19 @@ server.post('/web-hook', function (req, response, next) {
             const linkResponse = JSON.stringify(linkRes.data)
             const linkDetails = JSON.parse(linkResponse);
             linksData = linkDetails.items[0].link + "," + linkDetails.items[0].link + "," + linkDetails.items[0].link;
-            console.log(linksData);
+            console.log('linkdata', linksData);
             const videoResponse = JSON.stringify(videoRes.data)
             const videoDetails = JSON.parse(videoResponse);
             let link = 'https://www.youtube.com/embed/';
             videoData = link + videoDetails.items[0].id.videoId + "," + link + videoDetails.items[1].id.videoId + "," + link + videoDetails.items[2].id.videoId;
-            console.log(videoData);
-            return response.json({
-                fulfillmentText: linksData + ',' + videoData,
-                speech: linksData + ',' + videoData,
-                source: 'get-webhook-details'
-            });
+            console.log('videodata', videoData);
         }));
+
+    return response.json({
+        fulfillmentText: linksData + ',' + videoData,
+        speech: linksData + ',' + videoData,
+        source: 'get-webhook-details'
+    });
 });
 
 server.listen((process.env.PORT || 8333), () => {
