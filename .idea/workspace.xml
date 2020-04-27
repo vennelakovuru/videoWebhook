@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="24853fdd-1b8d-46c1-b70c-95dda754e0f3" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/index.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -59,7 +60,8 @@
       <workItem from="1587423709805" duration="575000" />
       <workItem from="1587442535090" duration="1438000" />
       <workItem from="1587626262029" duration="142000" />
-      <workItem from="1587945412995" duration="4426000" />
+      <workItem from="1587945412995" duration="9454000" />
+      <workItem from="1587960819579" duration="4072000" />
     </task>
     <servers />
   </component>
@@ -71,9 +73,9 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="463" y="120" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1587626327947" />
-    <state x="379" y="189" key="com.intellij.ide.util.TipDialog" timestamp="1587626289317">
+    <state x="379" y="189" key="com.intellij.ide.util.TipDialog" timestamp="1587963059167">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="379" y="189" key="com.intellij.ide.util.TipDialog/0.0.1366.728@0.0.1366.728" timestamp="1587626289317" />
+    <state x="379" y="189" key="com.intellij.ide.util.TipDialog/0.0.1366.728@0.0.1366.728" timestamp="1587963059167" />
   </component>
 </project>
