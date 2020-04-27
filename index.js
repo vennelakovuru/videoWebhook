@@ -43,6 +43,10 @@ server.post('/web-hook', function (req, response, next) {
                 fulfillmentText: linksData + ',' + videoData,
                 speech: linksData + ',' + videoData,
                 source: 'get-webhook-details'
+            })
+
+        .catch(error => {
+                console.log(error)
             });
 
         }));
