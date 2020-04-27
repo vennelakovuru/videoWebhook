@@ -32,12 +32,11 @@ server.post('/web-hook', function (req, response, next) {
             // do something with both responses
             const linkResponse = JSON.stringify(linkRes.data);
             const linkDetails = JSON.parse(linkResponse);
-            const link1 = [linkDetails.items[0].link, linkDetails.items[0].title, linkDetails.items[0].pagemap.cse_thumbnail[0].src];
-            const link2 = [linkDetails.items[1].link, linkDetails.items[1].title, linkDetails.items[1].pagemap.cse_thumbnail[0].src];
-            const link3 = [linkDetails.items[2].link, linkDetails.items[2].title, linkDetails.items[2].pagemap.cse_thumbnail[0].src];
-            linksData = link1 + "," + link2 + "," + link3;
+            linksData = linkDetails.items[0].link +','+ linkDetails.items[0].title + ','+ linkDetails.items[0].pagemap.cse_thumbnail[0].src
+            + "," + linkDetails.items[1].link +','+ linkDetails.items[1].title+','+ linkDetails.items[1].pagemap.cse_thumbnail[0].src
+            +" ," + linkDetails.items[2].link +','+ linkDetails.items[2].title+','+ linkDetails.items[2].pagemap.cse_thumbnail[0].src;
             console.log('linkdata', linksData);
-            const videoResponse = JSON.stringify(videoRes.data);
+            const videoResponse = JSON.stringify(videoRes.data)
             const videoDetails = JSON.parse(videoResponse);
             let link = 'https://www.youtube.com/embed/';
             videoData = link + videoDetails.items[0].id.videoId + "," + link + videoDetails.items[1].id.videoId + "," + link + videoDetails.items[2].id.videoId;
