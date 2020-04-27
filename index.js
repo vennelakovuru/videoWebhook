@@ -46,7 +46,7 @@ server.post('/web-hook', function (req, response, next) {
             })
 
         .catch(error => {
-                console.log(error)
+                console.log('heyehey', error);
             });
 
         }));
