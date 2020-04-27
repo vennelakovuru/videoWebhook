@@ -16,8 +16,8 @@ server.use(bodyParser.json());
 server.post('/web-hook', function (req, response, next) {
     var linksData;
     var videoData;
-    const apiKeyDup = 'AIzaSyAE1FuSqmtiMvN_sh080MkV8ySFuiStwTU';
-    const apiKey = 'AIzaSyDhGASYUnmjszNIjzQ2Pr58YNc7xekWxWg';
+    const apiKey = 'AIzaSyAE1FuSqmtiMvN_sh080MkV8ySFuiStwTU';
+    const apiKeydup = 'AIzaSyDhGASYUnmjszNIjzQ2Pr58YNc7xekWxWg';
     const query = req.body.queryResult.queryText;
     const videoUrl = encodeURI(`https://www.googleapis.com/youtube/v3/search?part=snippet&chart=mostPopular&type=video&maxResults=3&order=relevance&relevanceLanguage=en&q=${query}&key=${apiKey}`);
     const linkUrl = encodeURI(`https://www.googleapis.com/customsearch/v1?&key=${apiKey}&cx=017576662512468239146:omuauf_lfve&q=${query}&num=3&hl=en`);
