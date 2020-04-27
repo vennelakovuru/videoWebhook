@@ -33,7 +33,6 @@ server.post('/web-hook', function (req, response, next) {
             // do something with both responses
             const linkResponse = JSON.stringify(linkRes.data);
             const linkDetails = JSON.parse(linkResponse);
-            const image=[];
             //linksData = linkDetails.items[0].link + "," + linkDetails.items[1].link + "," + linkDetails.items[2].link;
             linksData = linkDetails.items[0].link +'^'+ linkDetails.items[0].title + '^'+ linkDetails.items[0].snippet+"^"
                 +linkDetails.items[1].link+'^'+linkDetails.items[1].title+'^'+ linkDetails.items[1].snippet+"^"
