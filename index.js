@@ -39,7 +39,7 @@ server.post('/web-hook', function (req, response, next) {
             const videoResponse = JSON.stringify(videoRes.data)
             const videoDetails = JSON.parse(videoResponse);
             let link = 'https://www.youtube.com/embed/';
-            videoData = link + videoDetails.items[0].id.videoId + "," + link + videoDetails.items[1].id.videoId + "," + link + videoDetails.items[2].id.videoId;
+            videoData = link + videoDetails.items[0].id.videoId + "^" + link + videoDetails.items[1].id.videoId + "^" + link + videoDetails.items[2].id.videoId;
             console.log('videodata', videoData);
 
             return response.json({
