@@ -23,8 +23,7 @@ server.post('/web-hook', function (req, response, next) {
 
     axios.all([
         axios.get(`https://www.googleapis.com/youtube/v3/search?part=snippet&chart=mostPopular&type=video&maxResults=3&order=relevance&relevanceLanguage=en&q=${query}&key=${apiKey}`),
-        axios.get(`https://www.googleapis.com/customsearch/v1?&key=${apiKey}&cx=014915153281259747060:rqmfryiuudy
-&q=${query}&num=3&hl=en`)
+        axios.get(`https://www.googleapis.com/customsearch/v1?&key=${apiKey}&cx=017576662512468239146:omuauf_lfve&q=${query}&num=3&hl=en`)
         // axios.get(videoUrl),
         // axios.get(linkUrl)
     ])
@@ -32,9 +31,7 @@ server.post('/web-hook', function (req, response, next) {
             // do something with both responses
             const linkResponse = JSON.stringify(linkRes.data);
             const linkDetails = JSON.parse(linkResponse);
-            linksData = linkDetails.items[0].link +','+ linkDetails.items[0].title + ','+ linkDetails.items[0].pagemap.cse_thumbnail[0].src
-            + "," + linkDetails.items[1].link +','+ linkDetails.items[1].title+','+ linkDetails.items[1].pagemap.cse_thumbnail[0].src
-            +" ," + linkDetails.items[2].link +','+ linkDetails.items[2].title+','+ linkDetails.items[2].pagemap.cse_thumbnail[0].src;
+            linksData = linkDetails.items[0].link + "," + linkDetails.items[1].link + "," + linkDetails.items[2].link;
             console.log('linkdata', linksData);
             const videoResponse = JSON.stringify(videoRes.data)
             const videoDetails = JSON.parse(videoResponse);
