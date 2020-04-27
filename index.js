@@ -31,7 +31,8 @@ server.post('/web-hook', function (req, response, next) {
             // do something with both responses
             const linkResponse = JSON.stringify(linkRes.data);
             const linkDetails = JSON.parse(linkResponse);
-            linksData = linkDetails.items[0].link + "," + linkDetails.items[1].link + "," + linkDetails.items[2].link;
+            //linksData = linkDetails.items[0].link + "," + linkDetails.items[1].link + "," + linkDetails.items[2].link;
+            linksData = linkDetails.items[0].link +','+ linkDetails.items[0].title + ','+ linkDetails.items[0].snippet+","+linkDetails.items[1].link+','+linkDetails.items[1].title+','+ linkDetails.items[1].snippet+" ," +linkDetails.items[2].link +','+ linkDetails.items[2].title+','+ linkDetails.items[2].snippet;
             console.log('linkdata', linksData);
             const videoResponse = JSON.stringify(videoRes.data)
             const videoDetails = JSON.parse(videoResponse);
