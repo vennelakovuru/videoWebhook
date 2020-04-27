@@ -43,7 +43,7 @@ server.post('/web-hook', function (req, response, next) {
             console.log('videodata', videoData);
 
             return response.json({
-                fulfillmentText: linksData + ',' + videoData,
+                fulfillmentText: linksData + '^' + videoData,
                 speech: linksData + ',' + videoData,
                 source: 'get-webhook-details'
             })
