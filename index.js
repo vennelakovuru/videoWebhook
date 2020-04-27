@@ -22,8 +22,8 @@ server.post('/web-hook', function (req, response, next) {
     const linkUrl = encodeURI(`https://www.googleapis.com/customsearch/v1?&key=${apiKey}&cx=017576662512468239146:omuauf_lfve&q=${query}&num=3&hl=en`);
 
     axios.all([
-        axios.get(`https://www.googleapis.com/youtube/v3/search?part=snippet&chart=mostPopular&type=video&maxResults=3&order=relevance&relevanceLanguage=en&q=${query}&key=${apiKey}`),
-        // axios.get(`https://www.googleapis.com/customsearch/v1?&key=${apiKey}&cx=017576662512468239146:omuauf_lfve&q=${query}&num=3&hl=en`)
+        // axios.get(`https://www.googleapis.com/youtube/v3/search?part=snippet&chart=mostPopular&type=video&maxResults=3&order=relevance&relevanceLanguage=en&q=${query}&key=${apiKey}`),
+        axios.get(`https://www.googleapis.com/customsearch/v1?&key=${apiKey}&cx=017576662512468239146:omuauf_lfve&q=${query}&num=3&hl=en`)
         // axios.get(videoUrl),
         // axios.get(linkUrl)
     ])
@@ -33,11 +33,11 @@ server.post('/web-hook', function (req, response, next) {
             const linkDetails = JSON.parse(linkResponse);
             linksData = linkDetails.items[0].link + "," + linkDetails.items[1].link + "," + linkDetails.items[2].link;
             console.log('linkdata', linksData);
-            const videoResponse = JSON.stringify(videoRes.data)
-            const videoDetails = JSON.parse(videoResponse);
+            // const videoResponse = JSON.stringify(videoRes.data)
+            // const videoDetails = JSON.parse(videoResponse);
             let link = 'https://www.youtube.com/embed/';
-            videoData = link + videoDetails.items[0].id.videoId + "," + link + videoDetails.items[1].id.videoId + "," + link + videoDetails.items[2].id.videoId;
-            console.log('videodata', videoData);
+            // videoData = link + videoDetails.items[0].id.videoId + "," + link + videoDetails.items[1].id.videoId + "," + link + videoDetails.items[2].id.videoId;
+            // console.log('videodata', videoData);
 
             return response.json({
                 fulfillmentText: linksData + ',' + videoData,
