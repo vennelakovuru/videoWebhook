@@ -33,7 +33,7 @@ server.post('/web-hook', function (req, response, next) {
             const linkDetails = JSON.parse(linkResponse);
             const image=[];
             for(let i=0; i<3; i++){
-                if(linkDetails.items[i].pagemap.cse_thumbnail[0].src !== undefined){
+                if(linkDetails.items[i].hasOwnProperty('pagemap')){
                     image[i]= linkDetails.items[i].pagemap.cse_thumbnail[0].src;
                 }else{
                     image[i]='https://hackernoon.com/drafts/unha26zu.png';
