@@ -23,7 +23,7 @@ server.post('/web-hook', function (req, response, next) {
 
     axios.all([
         axios.get(`https://www.googleapis.com/youtube/v3/search?part=snippet&chart=mostPopular&type=video&maxResults=3&order=relevance&relevanceLanguage=en&q=${query}&key=${apiKey}`),
-        axios.get(`https://www.googleapis.com/customsearch/v1?&key=${apiKey}&cx=017576662512468239146:omuauf_lfve&q=${query}&num=3&hl=en`)
+        // axios.get(`https://www.googleapis.com/customsearch/v1?&key=${apiKey}&cx=017576662512468239146:omuauf_lfve&q=${query}&num=3&hl=en`)
         // axios.get(videoUrl),
         // axios.get(linkUrl)
     ])
