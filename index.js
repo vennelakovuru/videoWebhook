@@ -41,7 +41,7 @@ server.post('/web-hook', function (req, response, next) {
             //     +linkDetails.items[2].link +'^'+ linkDetails.items[2].title+'^'+ linkDetails.items[2].snippet;
             // console.log('linkdata', linksData);
 
-            // let link = 'https://www.youtube.com/embed/';
+            let link = 'https://www.youtube.com/embed/';
             // // videoData = link + videoDetails.items[0].id.videoId + "^" + link + videoDetails.items[1].id.videoId + "^" + link + videoDetails.items[2].id.videoId;
             // videoData = link + videoDetails.items[0].id.videoId + "^" + link + videoDetails.items[1].id.videoId + "^" + link + videoDetails.items[2].id.videoId + "^"
             //     +videoDetails.items[0].snippet.title+ "^" + videoDetails.items[1].snippet.title + "^" +videoDetails.items[2].snippet.title+ "^"
