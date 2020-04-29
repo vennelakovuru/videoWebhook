@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="24853fdd-1b8d-46c1-b70c-95dda754e0f3" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/index.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -29,7 +30,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="E:/Advanced Sofware Engineering/GitHub/KnowledgeBot" />
     <property name="nodejs_package_manager_path" value="npm" />
   </component>
   <component name="RecentsManager">
@@ -60,7 +61,8 @@
       <workItem from="1587442535090" duration="1438000" />
       <workItem from="1587626262029" duration="142000" />
       <workItem from="1587945412995" duration="9454000" />
-      <workItem from="1587960819579" duration="16636000" />
+      <workItem from="1587960819579" duration="19649000" />
+      <workItem from="1588117607176" duration="7014000" />
     </task>
     <servers />
   </component>
@@ -68,14 +70,14 @@
     <option name="version" value="1" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="463" y="120" key="FileChooserDialogImpl" timestamp="1587626327947">
+    <state x="463" y="120" key="FileChooserDialogImpl" timestamp="1588122058089">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="463" y="120" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1587626327947" />
-    <state x="379" y="189" key="com.intellij.ide.util.TipDialog" timestamp="1587963059167">
+    <state x="463" y="120" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1588122058089" />
+    <state x="379" y="189" key="com.intellij.ide.util.TipDialog" timestamp="1588118915212">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="379" y="189" key="com.intellij.ide.util.TipDialog/0.0.1366.728@0.0.1366.728" timestamp="1587963059167" />
+    <state x="379" y="189" key="com.intellij.ide.util.TipDialog/0.0.1366.728@0.0.1366.728" timestamp="1588118915212" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -83,7 +85,6 @@
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/index.js</url>
           <line>34</line>
-          <properties lambdaOrdinal="-1" />
           <option name="temporary" value="true" />
           <option name="timeStamp" value="1" />
         </line-breakpoint>

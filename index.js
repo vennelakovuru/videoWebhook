@@ -18,7 +18,7 @@ server.post('/web-hook', function (req, response, next) {
     var videoData;
     const apiKeyPooja = 'AIzaSyAE1FuSqmtiMvN_sh080MkV8ySFuiStwTU';
     const apiKeyMe = 'AIzaSyDhGASYUnmjszNIjzQ2Pr58YNc7xekWxWg';
-    const apiKey ='AIzaSyCQ9x6nIYd2dZDJj5crDkoopVBkDZbu4ws';
+    const apiKey = 'AIzaSyCQ9x6nIYd2dZDJj5crDkoopVBkDZbu4ws';
     const query = req.body.queryResult.queryText;
     const videoUrl = encodeURI(`https://www.googleapis.com/youtube/v3/search?part=snippet&chart=mostPopular&type=video&maxResults=3&order=relevance&relevanceLanguage=en&q=${query}&key=${apiKey}`);
     const linkUrl = encodeURI(`https://www.googleapis.com/customsearch/v1?&key=${apiKey}&cx=017576662512468239146:omuauf_lfve&q=${query}&num=3&hl=en`);
@@ -33,30 +33,42 @@ server.post('/web-hook', function (req, response, next) {
             // do something with both responses
             const linkResponse = JSON.stringify(linkRes.data);
             const linkDetails = JSON.parse(linkResponse);
-            //linksData = linkDetails.items[0].link + "," + linkDetails.items[1].link + "," + linkDetails.items[2].link;
-            linksData = linkDetails.items[0].link +'^'+ linkDetails.items[0].title + '^'+ linkDetails.items[0].snippet+"^"
-                +linkDetails.items[1].link+'^'+linkDetails.items[1].title+'^'+ linkDetails.items[1].snippet+"^"
-                +linkDetails.items[2].link +'^'+ linkDetails.items[2].title+'^'+ linkDetails.items[2].snippet;
-            console.log('linkdata', linksData);
-            const videoResponse = JSON.stringify(videoRes.data)
+            const videoResponse = JSON.stringify(videoRes.data);
             const videoDetails = JSON.parse(videoResponse);
-            let link = 'https://www.youtube.com/embed/';
-            // videoData = link + videoDetails.items[0].id.videoId + "^" + link + videoDetails.items[1].id.videoId + "^" + link + videoDetails.items[2].id.videoId;
-            videoData = link + videoDetails.items[0].id.videoId + "^" + link + videoDetails.items[1].id.videoId + "^" + link + videoDetails.items[2].id.videoId + "^"
-                +videoDetails.items[0].snippet.title+ "^" + videoDetails.items[1].snippet.title + "^" +videoDetails.items[2].snippet.title+ "^"
-                +videoDetails.items[0].snippet.description  + "^" +videoDetails.items[1].snippet.description+ "^" + videoDetails.items[2].snippet.description;
+            // //linksData = linkDetails.items[0].link + "," + linkDetails.items[1].link + "," + linkDetails.items[2].link;
+            // linksData = linkDetails.items[0].link +'^'+ linkDetails.items[0].title + '^'+ linkDetails.items[0].snippet+"^"
+            //     +linkDetails.items[1].link+'^'+linkDetails.items[1].title+'^'+ linkDetails.items[1].snippet+"^"
+            //     +linkDetails.items[2].link +'^'+ linkDetails.items[2].title+'^'+ linkDetails.items[2].snippet;
+            // console.log('linkdata', linksData);
 
-            console.log('videodata', videoData);
+            // let link = 'https://www.youtube.com/embed/';
+            // // videoData = link + videoDetails.items[0].id.videoId + "^" + link + videoDetails.items[1].id.videoId + "^" + link + videoDetails.items[2].id.videoId;
+            // videoData = link + videoDetails.items[0].id.videoId + "^" + link + videoDetails.items[1].id.videoId + "^" + link + videoDetails.items[2].id.videoId + "^"
+            //     +videoDetails.items[0].snippet.title+ "^" + videoDetails.items[1].snippet.title + "^" +videoDetails.items[2].snippet.title+ "^"
+            //     +videoDetails.items[0].snippet.description  + "^" +videoDetails.items[1].snippet.description+ "^" + videoDetails.items[2].snippet.description;
+            //
+            // console.log('videodata', videoData);
+
+            const messsage1 = [{
+                card: {
+                    imageUri: videoDetails.items[0].snippet.thumbnails.default.url,
+                    buttons: [
+                        {
+                            text: "Link1",
+                            postback: link + videoDetails.items[0].id.videoId
+                        }
+                    ]
+                }
+            }];
+
 
             return response.json({
-                fulfillmentText: linksData + '^' + videoData,
-                speech: linksData + ',' + videoData,
-                source: 'get-webhook-details'
+                response: messsage1
             })
 
-        .catch(error => {
-                console.log('heyehey', error);
-            });
+                .catch(error => {
+                    console.log('heyehey', error);
+                });
 
         }));
 });
