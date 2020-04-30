@@ -23,15 +23,16 @@ server.post('/web-hook', function (req, response, next) {
 
     const query = req.body.queryResult.queryText;
     const intent = req.body.queryResult.action;
-    if(intent == video-intent) {
+    if(intent == 'video-intent') {
         const message = [{
             quickReplies: {
-                title: 'What would you prefer ?',
+                title: 'What would you prefer?',
                 quickReplies: [
                     'Watch Videos',
                     'Read Tutorials'
                 ]
             }
+
         }];
 
         return response.json({
