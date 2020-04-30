@@ -16,11 +16,15 @@ server.use(bodyParser.json());
 server.post('/web-hook', function (req, response, next) {
     var linksData;
     var videoData;
-    const apiKeypooja = 'AIzaSyAE1FuSqmtiMvN_sh080MkV8ySFuiStwTU';
-    const apiKeynew = 'AIzaSyDhGASYUnmjszNIjzQ2Pr58YNc7xekWxWg';
+    const apiKeyPooja = 'AIzaSyAE1FuSqmtiMvN_sh080MkV8ySFuiStwTU';
+    const apiKeyMe = 'AIzaSyDhGASYUnmjszNIjzQ2Pr58YNc7xekWxWg';
     const apiKeyJaggu = 'AIzaSyCQ9x6nIYd2dZDJj5crDkoopVBkDZbu4ws';
-    const apiKey='AIzaSyB0zGCeiZ9hoZtPPrdN3x2nrhVqg2N6Q2Y';
+    const apiKey='AIzaSyB0zGCeiZ9hoZtPPrdN3x2nrhVqg2N6Q2Y'
+
     const query = req.body.queryResult.queryText;
+    const videoUrl = encodeURI(`https://www.googleapis.com/youtube/v3/search?part=snippet&chart=mostPopular&type=video&maxResults=3&order=relevance&relevanceLanguage=en&q=${query}&key=${apiKey}`);
+    const linkUrl = encodeURI(`https://www.googleapis.com/customsearch/v1?&key=${apiKey}&cx=017576662512468239146:omuauf_lfve&q=${query}&num=3&hl=en`);
+
     axios.all([
         axios.get(`https://www.googleapis.com/youtube/v3/search?part=snippet&chart=mostPopular&type=video&maxResults=3&order=relevance&relevanceLanguage=en&q=${query}&key=${apiKey}`),
         axios.get(`https://www.googleapis.com/customsearch/v1?&key=${apiKey}&cx=014915153281259747060:rqmfryiuudy&q=${query}&num=3&hl=en`)
@@ -59,22 +63,11 @@ server.post('/web-hook', function (req, response, next) {
                 }
             }];
 
-            const message2 = [{
-                "quickReplies":
-                    {
-                        "title": string,
-                        "quickReplies": [
-                            string
-                        ]
-                    },
-
-            }];
-
 
             return response.json({
-                fulfillmentText: 'hello',
+                fulfillmentText: link + videoDetails.items[0].id.videoId,
                 fulfillmentMessages: messsage,
-                speech: 'hello',
+                speech: link + videoDetails.items[0].id.videoId,
                 source: 'get-Video-Details'
             })
 
