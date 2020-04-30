@@ -70,9 +70,11 @@ server.post('/web-hook', function (req, response, next) {
             // })
 
             return response.json({
+                "title": string,
                 "quickReplies": [
-                'Video', 'Tutorials'
+                    string
                 ]
+
         })
 
                 .catch(error => {
