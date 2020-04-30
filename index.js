@@ -61,21 +61,24 @@ server.post('/web-hook', function (req, response, next) {
                 }
             }];
 
+            const message2 = [{
+                "quickReplies":
+                    {
+                        "title": string,
+                        "quickReplies": [
+                            string
+                        ]
+                    },
 
-            // return response.json({
-            //     fulfillmentText: link + videoDetails.items[0].id.videoId,
-            //     fulfillmentMessages: messsage,
-            //     speech: link + videoDetails.items[0].id.videoId,
-            //     source: 'get-Video-Details'
-            // })
+            }];
+
 
             return response.json({
-                "title": string,
-                "quickReplies": [
-                    string
-                ]
-
-        })
+                fulfillmentText: link + videoDetails.items[0].id.videoId,
+                fulfillmentMessages: messsage2,
+                speech: link + videoDetails.items[0].id.videoId,
+                source: 'get-Video-Details'
+            })
 
                 .catch(error => {
                     console.log('heyehey', error);
