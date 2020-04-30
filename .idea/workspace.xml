@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="24853fdd-1b8d-46c1-b70c-95dda754e0f3" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/index.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -62,7 +63,7 @@
       <workItem from="1587945412995" duration="9454000" />
       <workItem from="1587960819579" duration="19649000" />
       <workItem from="1588117607176" duration="10995000" />
-      <workItem from="1588219834242" duration="3222000" />
+      <workItem from="1588219834242" duration="3824000" />
     </task>
     <servers />
   </component>
@@ -84,7 +85,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/index.js</url>
-          <line>64</line>
+          <line>61</line>
           <option name="temporary" value="true" />
           <option name="timeStamp" value="1" />
         </line-breakpoint>

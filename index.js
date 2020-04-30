@@ -21,9 +21,6 @@ server.post('/web-hook', function (req, response, next) {
     const apiKeyJaggu = 'AIzaSyCQ9x6nIYd2dZDJj5crDkoopVBkDZbu4ws';
     const apiKey='AIzaSyB0zGCeiZ9hoZtPPrdN3x2nrhVqg2N6Q2Y';
     const query = req.body.queryResult.queryText;
-    const videoUrl = encodeURI(`https://www.googleapis.com/youtube/v3/search?part=snippet&chart=mostPopular&type=video&maxResults=3&order=relevance&relevanceLanguage=en&q=${query}&key=${apiKey}`);
-    const linkUrl = encodeURI(`https://www.googleapis.com/customsearch/v1?&key=${apiKey}&cx=017576662512468239146:omuauf_lfve&q=${query}&num=3&hl=en`);
-
     axios.all([
         axios.get(`https://www.googleapis.com/youtube/v3/search?part=snippet&chart=mostPopular&type=video&maxResults=3&order=relevance&relevanceLanguage=en&q=${query}&key=${apiKey}`),
         axios.get(`https://www.googleapis.com/customsearch/v1?&key=${apiKey}&cx=014915153281259747060:rqmfryiuudy&q=${query}&num=3&hl=en`)
@@ -76,7 +73,7 @@ server.post('/web-hook', function (req, response, next) {
 
             return response.json({
                 fulfillmentText: 'hello',
-                fulfillmentMessages: messsage2,
+                fulfillmentMessages: messsage,
                 speech: 'hello',
                 source: 'get-Video-Details'
             })
