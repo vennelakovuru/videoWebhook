@@ -63,10 +63,19 @@ server.post('/web-hook', function (req, response, next) {
                 }
             }];
 
+            const message=[{
+                quickReplies: {
+                    title: 'string',
+                    quickReplies: [
+                        'string'
+                    ]
+                }
+
+            }];
 
             return response.json({
                 fulfillmentText: link + videoDetails.items[0].id.videoId,
-                fulfillmentMessages: messsage,
+                fulfillmentMessages: message,
                 speech: link + videoDetails.items[0].id.videoId,
                 source: 'get-Video-Details'
             })
