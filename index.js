@@ -62,12 +62,18 @@ server.post('/web-hook', function (req, response, next) {
             }];
 
 
+            // return response.json({
+            //     fulfillmentText: link + videoDetails.items[0].id.videoId,
+            //     fulfillmentMessages: messsage,
+            //     speech: link + videoDetails.items[0].id.videoId,
+            //     source: 'get-Video-Details'
+            // })
+
             return response.json({
-                fulfillmentText: link + videoDetails.items[0].id.videoId,
-                fulfillmentMessages: messsage,
-                speech: link + videoDetails.items[0].id.videoId,
-                source: 'get-Video-Details'
-            })
+                "quickReplies": [
+                'Video', 'Tutorials'
+                ]
+        })
 
                 .catch(error => {
                     console.log('heyehey', error);
