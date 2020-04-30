@@ -17,8 +17,8 @@ server.post('/web-hook', function (req, response, next) {
     var linksData;
     var videoData;
     const apiKeyPooja = 'AIzaSyAE1FuSqmtiMvN_sh080MkV8ySFuiStwTU';
-    const apiKeyMe = 'AIzaSyDhGASYUnmjszNIjzQ2Pr58YNc7xekWxWg';
-    const apiKey = 'AIzaSyCQ9x6nIYd2dZDJj5crDkoopVBkDZbu4ws';
+    const apiKey = 'AIzaSyDhGASYUnmjszNIjzQ2Pr58YNc7xekWxWg';
+    const apiKeyJaggu = 'AIzaSyCQ9x6nIYd2dZDJj5crDkoopVBkDZbu4ws';
     const query = req.body.queryResult.queryText;
     const videoUrl = encodeURI(`https://www.googleapis.com/youtube/v3/search?part=snippet&chart=mostPopular&type=video&maxResults=3&order=relevance&relevanceLanguage=en&q=${query}&key=${apiKey}`);
     const linkUrl = encodeURI(`https://www.googleapis.com/customsearch/v1?&key=${apiKey}&cx=017576662512468239146:omuauf_lfve&q=${query}&num=3&hl=en`);
@@ -49,7 +49,7 @@ server.post('/web-hook', function (req, response, next) {
             //
             // console.log('videodata', videoData);
 
-            const messsage1 = [{
+            const messsage = [{
                 card: {
                     imageUri: videoDetails.items[0].snippet.thumbnails.default.url,
                     buttons: [
@@ -64,7 +64,7 @@ server.post('/web-hook', function (req, response, next) {
 
             return response.json({
                 fulfillmentText: link + videoDetails.items[0].id.videoId,
-                fulfillmentMessages: messsage1,
+                fulfillmentMessages: messsage,
                 speech: link + videoDetails.items[0].id.videoId,
                 source: 'get-Video-Details'
             })
