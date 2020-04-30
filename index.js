@@ -22,23 +22,25 @@ server.post('/web-hook', function (req, response, next) {
     const apiKey='AIzaSyB0zGCeiZ9hoZtPPrdN3x2nrhVqg2N6Q2Y'
 
     const query = req.body.queryResult.queryText;
+    const intent = req.body.queryResult.action;
+    if(intent == video-intent) {
+        const message = [{
+            quickReplies: {
+                title: 'What would you prefer ?',
+                quickReplies: [
+                    'Watch Videos',
+                    'Read Tutorials'
+                ]
+            }
+        }];
 
-            const message=[{
-                quickReplies: {
-                    title: 'string',
-                    quickReplies: [
-                        'string'
-                    ]
-                }
-
-            }];
-
-            return response.json({
-                fulfillmentText: 'response',
-                fulfillmentMessages: message,
-                speech: 'response',
-                source: 'get-Video-Details'
-            })
+        return response.json({
+            fulfillmentText: 'response',
+            fulfillmentMessages: message,
+            speech: 'response',
+            source: 'get-Video-Details'
+        })
+    }
 });
 
 server.listen((process.env.PORT || 8333), () => {
