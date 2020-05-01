@@ -63,38 +63,61 @@ server.post('/web-hook', function (req, response, next) {
     if (action == 'level') {
         const intent = localStorage.getItem('intent');
         const category = localStorage.getItem('category');
-        console.log(category+intent);
         const query1 = query + " " + intent;
-        axios.all([
-            axios.get(`https://www.googleapis.com/youtube/v3/search?part=snippet&chart=mostPopular&type=video&maxResults=3&order=relevance&relevanceLanguage=en&q=${query1}&key=${apiKey}`)
-        ])
-            .then(axios.spread((videoRes, linkRes) => {
-                const videoResponse = JSON.stringify(videoRes.data);
-                const videoDetails = JSON.parse(videoResponse);
-                let link = 'https://www.youtube.com/embed/';
-                const messsage = [{
-                    card: {
-                        imageUri: videoDetails.items[0].snippet.thumbnails.default.url,
-                        buttons: [
-                            {
-                                text: "Link1",
-                                postback: link + videoDetails.items[0].id.videoId
-                            }
-                        ]
-                    }
-                }];
+        if(category == 'Videos') {
+            axios.all([
+                axios.get(`https://www.googleapis.com/youtube/v3/search?part=snippet&chart=mostPopular&type=video&maxResults=3&order=relevance&relevanceLanguage=en&q=${query1}&key=${apiKey}`)
+            ])
+                .then(axios.spread((videoRes, linkRes) => {
+                    const videoResponse = JSON.stringify(videoRes.data);
+                    const videoDetails = JSON.parse(videoResponse);
+                    let link = 'https://www.youtube.com/embed/';
+                    const messsage = [{
+                        card: {
+                            imageUri: videoDetails.items[0].snippet.thumbnails.default.url,
+                            buttons: [
+                                {
+                                    text: "Link1",
+                                    postback: link + videoDetails.items[0].id.videoId
+                                }
+                            ]
+                        }
+                    }];
 
-                return response.json({
-                    fulfillmentText: link + videoDetails.items[0].id.videoId,
-                    fulfillmentMessages: messsage,
-                    speech: link + videoDetails.items[0].id.videoId,
-                    source: 'get-Video-Details'
-                })
-                    .catch(error => {
-                        console.log('heyehey', error);
-                    });
+                    return response.json({
+                        fulfillmentText: link + videoDetails.items[0].id.videoId,
+                        fulfillmentMessages: messsage,
+                        speech: link + videoDetails.items[0].id.videoId,
+                        source: 'get-Video-Details'
+                    })
+                        .catch(error => {
+                            console.log('heyehey', error);
+                        });
 
-            }));
+                }));
+        }
+
+        if(category == 'Tutorials'){
+
+            axios.all([
+                axios.get(`https://www.googleapis.com/customsearch/v1?&key=${apiKey}&cx=014915153281259747060:rqmfryiuudy&q=${query1}&num=3&hl=en`)
+            ])
+                .then(axios.spread(( linkRes) => {
+                    const linkResponse = JSON.stringify(linkRes.data);
+                    const linkDetails = JSON.parse(linkResponse);
+
+                    const linksData = linkDetails.items[0].link;
+                    return response.json({
+                        fulfillmentText: linksData,
+                        speech: linksData,
+                        source: 'get-Video-Details'
+                    })
+                        .catch(error => {
+                            console.log('heyehey', error);
+                        });
+
+                }));
+        }
     }
 });
 
