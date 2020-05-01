@@ -24,17 +24,22 @@ server.post('/web-hook', function (req, response, next) {
     if (action == 'video-intent') {
         localStorage.setItem('intent', query);
         const message = [{
-            quickReplies: {
-                title: "What would you prefer?",
-                quickReplies: [
-                    'Videos',
-                    'Tutorials'
+            "text": {
+                "text": [
+                    "Text response from webhook"
                 ]
             }
+
+            // quickReplies: {
+            //     title: "What would you prefer?",
+            //     quickReplies: [
+            //         'Videos',
+            //         'Tutorials'
+            //     ]
+            // }
         }];
 
         return response.json({
-            fulfillmentText: "What would you prefer?",
             fulfillmentMessages: message,
             source: 'get-Video-Details'
         })
@@ -45,17 +50,16 @@ server.post('/web-hook', function (req, response, next) {
         const message = [{
             quickReplies: {
                 title: 'Tell us your expert level',
-                // quickReplies: [
-                //     'Beginner',
-                //     'Intermediate',
-                //     'Expert'
-                // ]
+                quickReplies: [
+                    'Beginner',
+                    'Intermediate',
+                    'Expert'
+                ]
             }
 
         }];
 
         return response.json({
-            fulfillmentText: "Tell us your expert level",
             fulfillmentMessages: message,
             source: 'get-category-details'
         })
