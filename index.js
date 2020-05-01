@@ -71,7 +71,7 @@ server.post('/web-hook', function (req, response, next) {
                 .then(axios.spread((videoRes, linkRes) => {
                     const videoResponse = JSON.stringify(videoRes.data);
                     const videoDetails = JSON.parse(videoResponse);
-                    let link = 'www.youtube.com/watch?v=';
+                    let link = 'https://www.youtube.com/watch?v=';
                     const messsage = [{
                         card: {
                             imageUri: videoDetails.items[0].snippet.thumbnails.high.url,
