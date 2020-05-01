@@ -71,10 +71,10 @@ server.post('/web-hook', function (req, response, next) {
                 .then(axios.spread((videoRes, linkRes) => {
                     const videoResponse = JSON.stringify(videoRes.data);
                     const videoDetails = JSON.parse(videoResponse);
-                    let link = 'https://www.youtube.com/embed/';
+                    let link = 'www.youtube.com/watch?v=';
                     const messsage = [{
                         card: {
-                            title: videoDetails.items[0].snippet.title,
+                            Subtitle: videoDetails.items[0].snippet.title,
                             imageUri: videoDetails.items[0].snippet.thumbnails.high.url,
                             buttons: [
                                 {
@@ -86,7 +86,7 @@ server.post('/web-hook', function (req, response, next) {
                     },
                         {
                             card: {
-                                title: videoDetails.items[1].snippet.title,
+                                subtitle: videoDetails.items[1].snippet.title,
                                 imageUri: videoDetails.items[1].snippet.thumbnails.high.url,
                                 buttons: [
                                     {
@@ -98,12 +98,12 @@ server.post('/web-hook', function (req, response, next) {
                         },
                         {
                             card: {
-                                title: videoDetails.items[0].snippet.title,
-                                imageUri: videoDetails.items[0].snippet.thumbnails.high.url,
+                                subtitle: videoDetails.items[2].snippet.title,
+                                imageUri: videoDetails.items[2].snippet.thumbnails.high.url,
                                 buttons: [
                                     {
-                                        text: link + videoDetails.items[0].id.videoId,
-                                        postback: link + videoDetails.items[0].id.videoId
+                                        text: link + videoDetails.items[2].id.videoId,
+                                        postback: link + videoDetails.items[2].id.videoId
                                     }
                                 ]
                             }
