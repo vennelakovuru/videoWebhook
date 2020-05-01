@@ -48,7 +48,6 @@ server.post('/web-hook', function (req, response, next) {
 
     if (action == 'category') {
         localStorage.setItem('category', query);
-
         const message = {
             text: {
                 text: [
@@ -77,6 +76,7 @@ server.post('/web-hook', function (req, response, next) {
         const intent = localStorage.getItem('intent');
         const category = localStorage.getItem('category');
         const query1 = query + " " + intent;
+        console.log(query1);
         if (category == 'Videos') {
             axios.all([
                 axios.get(`https://www.googleapis.com/youtube/v3/search?part=snippet&chart=mostPopular&type=video&maxResults=3&order=relevance&relevanceLanguage=en&q=${query1}&key=${apiKey}`)
