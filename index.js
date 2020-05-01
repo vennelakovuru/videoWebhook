@@ -23,8 +23,10 @@ server.post('/web-hook', function (req, response, next) {
     const videoUrl = encodeURI(`https://www.googleapis.com/youtube/v3/search?part=snippet&chart=mostPopular&type=video&maxResults=3&order=relevance&relevanceLanguage=en&q=${query}&key=${apiKey}`);
     const linkUrl = encodeURI(`https://www.googleapis.com/customsearch/v1?&key=${apiKey}&cx=017576662512468239146:omuauf_lfve&q=${query}&num=3&hl=en`);
 
+    axios.all([
         axios.get(`https://www.googleapis.com/youtube/v3/search?part=snippet&chart=mostPopular&type=video&maxResults=3&order=relevance&relevanceLanguage=en&q=${query}&key=${apiKey}`)
-        .then(videoRes => {
+ ])
+        .then(axios.spread((videoRes, linkRes) => {
             // do something with both responses
             const videoResponse = JSON.stringify(videoRes.data);
             const videoDetails = JSON.parse(videoResponse);
