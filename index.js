@@ -26,7 +26,7 @@ server.post('/web-hook', function (req, response, next) {
         const message = {
             "text": {
                 "text": [
-                    "Text response from webhook"
+                    "Which one do you prefer?"
                 ]
             }
         };
@@ -48,7 +48,15 @@ server.post('/web-hook', function (req, response, next) {
 
     if (action == 'category') {
         localStorage.setItem('category', query);
-        const message = [{
+
+        const message = {
+            text: {
+                text: [
+                    "Tell us ur expert level"
+                ]
+            }
+        };
+        const message1 = {
             quickReplies: {
                 title: 'Tell us your expert level',
                 quickReplies: [
@@ -57,11 +65,10 @@ server.post('/web-hook', function (req, response, next) {
                     'Expert'
                 ]
             }
-
-        }];
+        };
 
         return response.json({
-            fulfillmentMessages: message,
+            fulfillmentMessages: [message, message1],
             source: 'get-category-details'
         })
     }
