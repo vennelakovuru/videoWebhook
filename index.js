@@ -21,20 +21,23 @@ server.post('/web-hook', function (req, response, next) {
     const apiKey = 'AIzaSyCQ9x6nIYd2dZDJj5crDkoopVBkDZbu4ws';
     const query = req.body.queryResult.queryText;
     const action = req.body.queryResult.action;
+
     if (action == 'video-intent') {
         localStorage.setItem('intent', query);
         const message = {
             text: {
                 text: [
-                    "What would you prefer?"
+                    "Select your preference?"
                 ]
             }
         };
         const message1 ={
             quickReplies: {
                 quickReplies: [
-                    'Videos',
-                    'Tutorials'
+                    'Courses',
+                    'Projects',
+                    'Installations',
+                    'Code Challenges'
                 ]
             }
         };
@@ -45,8 +48,8 @@ server.post('/web-hook', function (req, response, next) {
         })
     }
 
-    if (action == 'category') {
-        localStorage.setItem('category', query);
+    if (action == 'type') {
+        localStorage.setItem('type', query);
         const message = {
             text: {
                 text: [
@@ -69,12 +72,37 @@ server.post('/web-hook', function (req, response, next) {
             source: 'get-category-details'
         })
     }
+    if (action == 'category') {
+        localStorage.setItem('category', query);
+        const message = {
+            text: {
+                text: [
+                    "What would you prefer?"
+                ]
+            }
+        };
+        const message1 ={
+            quickReplies: {
+                quickReplies: [
+                    'Learn through Videos',
+                    'Read to learn'
+                ]
+            }
+        };
+
+        return response.json({
+            fulfillmentMessages: [message,message1],
+            source: 'get-Video-Details'
+        })
+    }
+
 
     if (action == 'level') {
         const intent = localStorage.getItem('intent');
         const category = localStorage.getItem('category');
+        const type = localStorage.getItem('type');
         if (category == 'Videos') {
-            const query1 = query + " " + intent + " course";
+            const query1 = query + " " + intent + " "+ type;
             axios.all([
                 axios.get(`https://www.googleapis.com/youtube/v3/search?part=snippet&chart=mostPopular&type=video&maxResults=3&order=relevance&relevanceLanguage=en&q=${query1}&key=${apiKey}`)
             ])
