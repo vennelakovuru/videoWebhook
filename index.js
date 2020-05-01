@@ -84,7 +84,9 @@ server.post('/web-hook', function (req, response, next) {
                 }];
 
                 return response.json({
+                    fulfillmentText: link + videoDetails.items[0].id.videoId,
                     fulfillmentMessages: messsage2,
+                    speech: link + videoDetails.items[0].id.videoId,
                     source: 'get-Video-Details'
                 })
                     .catch(error => {
