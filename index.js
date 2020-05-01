@@ -64,10 +64,12 @@ server.post('/web-hook', function (req, response, next) {
 
     if (action == 'level') {
         console.log("level intent");
+        console.log(query);
         axios.all([
             axios.get(`https://www.googleapis.com/youtube/v3/search?part=snippet&chart=mostPopular&type=video&maxResults=3&order=relevance&relevanceLanguage=en&q=${query}&key=${apiKey}`),
         ])
             .then(axios.spread((videoRes) => {
+                console.log(videoRes);
                 const videoResponse = JSON.stringify(videoRes);
                 const videoDetails = JSON.parse(videoResponse);
                 let link = 'https://www.youtube.com/embed/';
