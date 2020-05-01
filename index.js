@@ -34,7 +34,7 @@ server.post('/web-hook', function (req, response, next) {
         }];
 
         return response.json({
-            fulfillmentText: 'What would you prefer?',
+            fulfillmentText: "What would you prefer?",
             fulfillmentMessages: message,
             source: 'get-Video-Details'
         })
@@ -55,7 +55,7 @@ server.post('/web-hook', function (req, response, next) {
         }];
 
         return response.json({
-            fulfillmentText: 'Tell us your expert level',
+            fulfillmentText: "Tell us your expert level",
             fulfillmentMessages: message,
             source: 'get-category-details'
         })
