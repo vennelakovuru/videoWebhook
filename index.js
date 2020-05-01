@@ -24,6 +24,13 @@ server.post('/web-hook', function (req, response, next) {
     if (action == 'video-intent') {
         localStorage.setItem('intent', query);
         const message = [{
+
+            "text": {
+                "text": [
+                    "Text response from webhook"
+                ]
+            },
+
             quickReplies: {
                 title: "What would you prefer?",
                 quickReplies: [
