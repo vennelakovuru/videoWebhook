@@ -22,8 +22,8 @@ server.post('/web-hook', function (req, response, next) {
     const apiKey='AIzaSyB0zGCeiZ9hoZtPPrdN3x2nrhVqg2N6Q2Y'
 
     const query = req.body.queryResult.queryText;
-    const intent = req.body.queryResult.action;
-    if(intent == 'video-intent') {
+    const action = req.body.queryResult.action;
+    if(action == 'video-intent') {
         const message = [{
             quickReplies: {
                 title: 'What would you prefer?',
@@ -36,12 +36,30 @@ server.post('/web-hook', function (req, response, next) {
         }];
 
         return response.json({
-            fulfillmentText: 'response',
             fulfillmentMessages: message,
-            speech: 'response',
             source: 'get-Video-Details'
         })
     }
+
+    if(action == 'category'){
+        const message = [{
+            quickReplies: {
+                title: 'Tell us your expert level',
+                quickReplies: [
+                    'Beginner',
+                    'Intermediate',
+                    'Expert'
+                ]
+            }
+
+        }];
+
+        return response.json({
+            fulfillmentMessages: message,
+            source: 'get-category-details'
+        })
+    }
+    
 });
 
 server.listen((process.env.PORT || 8333), () => {
