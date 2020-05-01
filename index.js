@@ -66,7 +66,7 @@ server.post('/web-hook', function (req, response, next) {
         console.log("level intent");
         console.log(query);
         axios.all([
-            axios.get(`https://www.googleapis.com/youtube/v3/search?part=snippet&chart=mostPopular&type=video&maxResults=3&order=relevance&relevanceLanguage=en&q=${query}&key=${apiKey}`),
+            axios.get(`https://www.googleapis.com/youtube/v3/search?part=snippet&chart=mostPopular&type=video&maxResults=3&order=relevance&relevanceLanguage=en&q=${query}&key=${apiKey}`)
         ])
             .then(axios.spread((videoRes) => {
                 console.log(videoRes);
