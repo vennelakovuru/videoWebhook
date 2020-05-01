@@ -23,24 +23,25 @@ server.post('/web-hook', function (req, response, next) {
     const action = req.body.queryResult.action;
     if (action == 'video-intent') {
         localStorage.setItem('intent', query);
-        const message = [{
+        const message = {
             "text": {
                 "text": [
                     "Text response from webhook"
                 ]
             }
-
-            // quickReplies: {
-            //     title: "What would you prefer?",
-            //     quickReplies: [
-            //         'Videos',
-            //         'Tutorials'
-            //     ]
-            // }
-        }];
+        };
+        const message1 ={
+            quickReplies: {
+                title: "What would you prefer?",
+                quickReplies: [
+                    'Videos',
+                    'Tutorials'
+                ]
+            }
+        };
 
         return response.json({
-            fulfillmentMessages: message,
+            fulfillmentMessages: [message,message1],
             source: 'get-Video-Details'
         })
     }
