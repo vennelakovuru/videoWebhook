@@ -74,35 +74,40 @@ server.post('/web-hook', function (req, response, next) {
                     let link = 'https://www.youtube.com/embed/';
                     const messsage = [{
                         card: {
-                            imageUri: videoDetails.items[0].snippet.thumbnails.default.url,
+                            title: videoDetails.items[0].snippet.thumbnails.medium.title,
+                            imageUri: videoDetails.items[0].snippet.thumbnails.medium.url,
                             buttons: [
                                 {
-                                    text: "Link1",
+                                    text: link + videoDetails.items[0].id.videoId,
                                     postback: link + videoDetails.items[0].id.videoId
                                 }
                             ]
                         }
-                    }];
-
-                    const messages =
-                    [
+                    },
                         {
-                            type: "media_content",
-                            platform: "google",
-                            mediaType: "AUDIO",
-                            mediaObjects: [
-                                {
-                                    name: "Media content card title",
-                                    description: "Media content card description",
-                                    largeImage: {
-                                        url: "http://imageUrl.com",
-                                        accessibilityText: "Image description for screen readers"
-                                    },
-                                    contentUrl: "https://urlToMediaFile.com"
-                                }
-                            ]
-                        }
-                    ];
+                            card: {
+                                title: videoDetails.items[1].snippet.thumbnails.medium.title,
+                                imageUri: videoDetails.items[1].snippet.thumbnails.medium.url,
+                                buttons: [
+                                    {
+                                        text: link + videoDetails.items[1].id.videoId,
+                                        postback: link + videoDetails.items[1].id.videoId
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            card: {
+                                title: videoDetails.items[0].snippet.thumbnails.medium.title,
+                                imageUri: videoDetails.items[0].snippet.thumbnails.medium.url,
+                                buttons: [
+                                    {
+                                        text: link + videoDetails.items[0].id.videoId,
+                                        postback: link + videoDetails.items[0].id.videoId
+                                    }
+                                ]
+                            }
+                        }];
 
 
                     return response.json({
