@@ -74,11 +74,10 @@ server.post('/web-hook', function (req, response, next) {
                     let link = 'www.youtube.com/watch?v=';
                     const messsage = [{
                         card: {
-                            Subtitle: videoDetails.items[0].snippet.title,
                             imageUri: videoDetails.items[0].snippet.thumbnails.high.url,
                             buttons: [
                                 {
-                                    text: link + videoDetails.items[0].id.videoId,
+                                    text: videoDetails.items[0].snippet.title,
                                     postback: link + videoDetails.items[0].id.videoId
                                 }
                             ]
@@ -86,11 +85,10 @@ server.post('/web-hook', function (req, response, next) {
                     },
                         {
                             card: {
-                                subtitle: videoDetails.items[1].snippet.title,
                                 imageUri: videoDetails.items[1].snippet.thumbnails.high.url,
                                 buttons: [
                                     {
-                                        text: link + videoDetails.items[1].id.videoId,
+                                        text: videoDetails.items[1].snippet.title,
                                         postback: link + videoDetails.items[1].id.videoId
                                     }
                                 ]
@@ -98,11 +96,10 @@ server.post('/web-hook', function (req, response, next) {
                         },
                         {
                             card: {
-                                subtitle: videoDetails.items[2].snippet.title,
                                 imageUri: videoDetails.items[2].snippet.thumbnails.high.url,
                                 buttons: [
                                     {
-                                        text: link + videoDetails.items[2].id.videoId,
+                                        text: videoDetails.items[2].snippet.title,
                                         postback: link + videoDetails.items[2].id.videoId
                                     }
                                 ]
