@@ -24,6 +24,7 @@ server.post('/web-hook', function (req, response, next) {
     const query = req.body.queryResult.queryText;
     const action = req.body.queryResult.action;
     if(action == 'video-intent') {
+        const intent = query;
         const message = [{
             quickReplies: {
                 title: 'What would you prefer?',
@@ -42,6 +43,7 @@ server.post('/web-hook', function (req, response, next) {
     }
 
     if(action == 'category'){
+        const category= query;
         const message = [{
             quickReplies: {
                 title: 'Tell us your expert level',
@@ -58,6 +60,33 @@ server.post('/web-hook', function (req, response, next) {
             fulfillmentMessages: message,
             source: 'get-category-details'
         })
+    }
+
+    if(action == 'level'){
+        axios.get(`https://www.googleapis.com/youtube/v3/search?part=snippet&chart=mostPopular&type=video&maxResults=3&order=relevance&relevanceLanguage=en&q=${query1}&key=${apiKey}`)
+            .then(response =>{
+                const videoResponse = JSON.stringify(response);
+                const videoDetails = JSON.parse(videoResponse);
+                let link = 'https://www.youtube.com/embed/';
+                const messsage2 = [{
+                    card: {
+                        imageUri: videoDetails.items[0].snippet.thumbnails.default.url,
+                        buttons: [
+                            {
+                                text: "Link1",
+                                postback: link + videoDetails.items[0].id.videoId
+                            }
+                        ]
+                    }
+                }];
+
+                return response.json({
+                    fulfillmentText: link + videoDetails.items[0].id.videoId,
+                    fulfillmentMessages: messsage2,
+                    speech: link + videoDetails.items[0].id.videoId,
+                    source: 'get-Video-Details'
+                })
+            })
     }
 
 });
