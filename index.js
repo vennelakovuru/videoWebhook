@@ -107,7 +107,7 @@ server.post('/web-hook', function (req, response, next) {
 
                     return response.json({
                         fulfillmentText: link + videoDetails.items[0].id.videoId,
-                        fulfillmentMessages: messages,
+                        fulfillmentMessages: messsage,
                         speech: link + videoDetails.items[0].id.videoId,
                         source: 'get-Video-Details'
                     })
