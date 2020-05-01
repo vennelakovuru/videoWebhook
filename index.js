@@ -87,6 +87,10 @@ server.post('/web-hook', function (req, response, next) {
                     fulfillmentMessages: messsage2,
                     source: 'get-Video-Details'
                 })
+                    .catch(error => {
+                        console.log('heyehey', error);
+                    });
+
             });
     }
 });
