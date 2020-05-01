@@ -64,7 +64,7 @@ server.post('/web-hook', function (req, response, next) {
         const intent = localStorage.getItem('intent');
         const category = localStorage.getItem('category');
         const query1 = query + " " + intent;
-        if(category == 'Videos') {
+        if (category == 'Videos') {
             axios.all([
                 axios.get(`https://www.googleapis.com/youtube/v3/search?part=snippet&chart=mostPopular&type=video&maxResults=3&order=relevance&relevanceLanguage=en&q=${query1}&key=${apiKey}`)
             ])
@@ -84,9 +84,30 @@ server.post('/web-hook', function (req, response, next) {
                         }
                     }];
 
+                    const messages =
+                    [
+                        {
+                            type: "media_content",
+                            platform: "google",
+                            mediaType: "AUDIO",
+                            mediaObjects: [
+                                {
+                                    name: "Media content card title",
+                                    description: "Media content card description",
+                                    largeImage: {
+                                        url: "http://imageUrl.com",
+                                        accessibilityText: "Image description for screen readers"
+                                    },
+                                    contentUrl: "https://urlToMediaFile.com"
+                                }
+                            ]
+                        }
+                    ];
+
+
                     return response.json({
                         fulfillmentText: link + videoDetails.items[0].id.videoId,
-                        fulfillmentMessages: messsage,
+                        fulfillmentMessages: messages,
                         speech: link + videoDetails.items[0].id.videoId,
                         source: 'get-Video-Details'
                     })
@@ -97,12 +118,12 @@ server.post('/web-hook', function (req, response, next) {
                 }));
         }
 
-        if(category == 'Tutorials'){
+        if (category == 'Tutorials') {
 
             axios.all([
                 axios.get(`https://www.googleapis.com/customsearch/v1?&key=${apiKey}&cx=014915153281259747060:rqmfryiuudy&q=${query1}&num=3&hl=en`)
             ])
-                .then(axios.spread(( linkRes) => {
+                .then(axios.spread((linkRes) => {
                     const linkResponse = JSON.stringify(linkRes.data);
                     const linkDetails = JSON.parse(linkResponse);
 

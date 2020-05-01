@@ -30,7 +30,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="E:/PB/PB-PROJECT" />
+    <property name="last_opened_file_path" value="E:/Advanced Sofware Engineering/GitHub/KnowledgeBot" />
     <property name="nodejs_package_manager_path" value="npm" />
   </component>
   <component name="RecentsManager">
@@ -63,21 +63,27 @@
       <workItem from="1587945412995" duration="9454000" />
       <workItem from="1587960819579" duration="19649000" />
       <workItem from="1588117607176" duration="10995000" />
-      <workItem from="1588219834242" duration="12821000" />
+      <workItem from="1588219834242" duration="14417000" />
+      <workItem from="1588306579840" duration="2965000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+    <option name="exactExcludedFiles">
+      <list>
+        <option value="E:/Advanced Sofware Engineering/GitHub/KnowledgeBot/node_modules/karma/config.tpl.js" />
+      </list>
+    </option>
   </component>
   <component name="WindowStateProjectService">
-    <state x="463" y="120" key="FileChooserDialogImpl" timestamp="1588218151419">
+    <state x="463" y="120" key="FileChooserDialogImpl" timestamp="1588309621340">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="463" y="120" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1588218151419" />
-    <state x="379" y="189" key="com.intellij.ide.util.TipDialog" timestamp="1588118915212">
+    <state x="463" y="120" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1588309621340" />
+    <state x="379" y="189" key="com.intellij.ide.util.TipDialog" timestamp="1588309580991">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="379" y="189" key="com.intellij.ide.util.TipDialog/0.0.1366.728@0.0.1366.728" timestamp="1588118915212" />
+    <state x="379" y="189" key="com.intellij.ide.util.TipDialog/0.0.1366.728@0.0.1366.728" timestamp="1588309580991" />
   </component>
 </project>
