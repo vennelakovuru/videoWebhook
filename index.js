@@ -24,24 +24,14 @@ server.post('/web-hook', function (req, response, next) {
     if (action == 'video-intent') {
         localStorage.setItem('intent', query);
         const message = [{
-            simpleResponses: [
-                {
-                    textToSpeech: 'What would you prefer?',
-                    displayText: 'What would you prefer?'
-                }
-            ]
-        },
-            {
             quickReplies: {
-                title: 'What would you prefer?',
+                title: "What would you prefer?",
                 quickReplies: [
                     'Videos',
                     'Tutorials'
                 ]
             }
-
-        }
-        ];
+        }];
 
         return response.json({
             fulfillmentMessages: message,
