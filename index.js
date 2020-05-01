@@ -74,8 +74,8 @@ server.post('/web-hook', function (req, response, next) {
                     let link = 'https://www.youtube.com/embed/';
                     const messsage = [{
                         card: {
-                            title: videoDetails.items[0].snippet.thumbnails.medium.title,
-                            imageUri: videoDetails.items[0].snippet.thumbnails.medium.url,
+                            title: videoDetails.items[0].snippet.title,
+                            imageUri: videoDetails.items[0].snippet.thumbnails.high.url,
                             buttons: [
                                 {
                                     text: link + videoDetails.items[0].id.videoId,
@@ -86,8 +86,8 @@ server.post('/web-hook', function (req, response, next) {
                     },
                         {
                             card: {
-                                title: videoDetails.items[1].snippet.thumbnails.medium.title,
-                                imageUri: videoDetails.items[1].snippet.thumbnails.medium.url,
+                                title: videoDetails.items[1].snippet.title,
+                                imageUri: videoDetails.items[1].snippet.thumbnails.high.url,
                                 buttons: [
                                     {
                                         text: link + videoDetails.items[1].id.videoId,
@@ -98,8 +98,8 @@ server.post('/web-hook', function (req, response, next) {
                         },
                         {
                             card: {
-                                title: videoDetails.items[0].snippet.thumbnails.medium.title,
-                                imageUri: videoDetails.items[0].snippet.thumbnails.medium.url,
+                                title: videoDetails.items[0].snippet.title,
+                                imageUri: videoDetails.items[0].snippet.thumbnails.high.url,
                                 buttons: [
                                     {
                                         text: link + videoDetails.items[0].id.videoId,
