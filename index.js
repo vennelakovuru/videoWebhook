@@ -132,6 +132,7 @@ server.post('/web-hook', function (req, response, next) {
                     const linksData = linkDetails.items[0].link;
                     const messsage = [{
                         card: {
+                            title: linkDetails.items[0].title,
                             buttons: [
                                 {
                                     text: linkDetails.items[0].title,
@@ -142,6 +143,7 @@ server.post('/web-hook', function (req, response, next) {
                     },
                         {
                             card: {
+                                title: linkDetails.items[1].title,
                                 buttons: [
                                     {
                                         text: linkDetails.items[1].title,
@@ -152,10 +154,11 @@ server.post('/web-hook', function (req, response, next) {
                         },
                         {
                             card: {
+                                title: linkDetails.items[2].title,
                                 buttons: [
                                     {
-                                        text: linkDetails.items[1].title,
-                                        postback: linkDetails.items[0].link
+                                        text: linkDetails.items[2].title,
+                                        postback: linkDetails.items[2].link
                                     }
                                 ]
                             }
