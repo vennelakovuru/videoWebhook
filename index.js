@@ -4,6 +4,8 @@ const bodyParser = require('body-parser');
 const https = require('https');
 const axios = require('axios');
 const cors = require('cors');
+const localStorage = require('localStorage')
+
 
 const server = express();
 server.use(cors());
@@ -20,7 +22,7 @@ server.post('/web-hook', function (req, response, next) {
     const query = req.body.queryResult.queryText;
     const action = req.body.queryResult.action;
     if (action == 'video-intent') {
-        const intent = query;
+        localStorage.setItem('intent', query);
         const message = [{
             quickReplies: {
                 title: 'What would you prefer?',
@@ -39,7 +41,7 @@ server.post('/web-hook', function (req, response, next) {
     }
 
     if (action == 'category') {
-        const category = query;
+        localStorage.setItem('category', query);
         const message = [{
             quickReplies: {
                 title: 'Tell us your expert level',
@@ -59,6 +61,9 @@ server.post('/web-hook', function (req, response, next) {
     }
 
     if (action == 'level') {
+        const intent = localStorage.getItem('intent');
+        const category = localStorage.getItem('category');
+        console.log(category+intent);
         axios.all([
             axios.get(`https://www.googleapis.com/youtube/v3/search?part=snippet&chart=mostPopular&type=video&maxResults=3&order=relevance&relevanceLanguage=en&q=${query}&key=${apiKey}`)
         ])
