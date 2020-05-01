@@ -131,17 +131,11 @@ server.post('/web-hook', function (req, response, next) {
 
                     const linksData = linkDetails.items[0].link;
                     const messsage = [{
-                        card: {
-                            title: linkDetails.items[0].title,
-                            buttons: [
-                                {
-                                    text: linkDetails.items[0].title,
-                                    postback: linkDetails.items[0].link
-                                }
-                            ]
-                        }
-                    },
-                        {
+                        linkOutSuggestion: {
+                            "destinationName": linkDetails.items[1].title,
+                            "uri": linkDetails.items[1].link
+                        },
+
                             card: {
                                 title: linkDetails.items[1].title,
                                 buttons: [
