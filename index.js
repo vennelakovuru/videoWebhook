@@ -63,6 +63,7 @@ server.post('/web-hook', function (req, response, next) {
     }
 
     if(action == 'level'){
+        console.log("level intent");
         axios.get(`https://www.googleapis.com/youtube/v3/search?part=snippet&chart=mostPopular&type=video&maxResults=3&order=relevance&relevanceLanguage=en&q=${query}&key=${apiKey}`)
             .then(response =>{
                 const videoResponse = JSON.stringify(response);
@@ -81,9 +82,7 @@ server.post('/web-hook', function (req, response, next) {
                 }];
 
                 return response.json({
-                    fulfillmentText: link + videoDetails.items[0].id.videoId,
                     fulfillmentMessages: messsage2,
-                    speech: link + videoDetails.items[0].id.videoId,
                     source: 'get-Video-Details'
                 })
             })
