@@ -45,11 +45,11 @@ server.post('/web-hook', function (req, response, next) {
         const message = [{
             quickReplies: {
                 title: 'Tell us your expert level',
-                quickReplies: [
-                    'Beginner',
-                    'Intermediate',
-                    'Expert'
-                ]
+                // quickReplies: [
+                //     'Beginner',
+                //     'Intermediate',
+                //     'Expert'
+                // ]
             }
 
         }];
