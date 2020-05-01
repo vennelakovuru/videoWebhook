@@ -130,36 +130,17 @@ server.post('/web-hook', function (req, response, next) {
                     const linkDetails = JSON.parse(linkResponse);
 
                     const linksData = linkDetails.items[0].link;
-                    const messsage = [{
+
+                    const message = [{
                         linkOutSuggestion: {
                             destinationName: 'string',
                             uri: 'string'
-                        },
-                            card: {
-                                title: linkDetails.items[1].title,
-                                buttons: [
-                                    {
-                                        text: linkDetails.items[1].title,
-                                        postback: linkDetails.items[1].link
-                                    }
-                                ]
-                            }
-                        },
-                        {
-                            card: {
-                                title: linkDetails.items[2].title,
-                                buttons: [
-                                    {
-                                        text: linkDetails.items[2].title,
-                                        postback: linkDetails.items[2].link
-                                    }
-                                ]
-                            }
-                        }];
+                        }
+                    }];
 
                     return response.json({
                         fulfillmentText: linksData,
-                        fulfillmentMessages: messsage,
+                        fulfillmentMessages: message,
                         speech: linksData,
                         source: 'get-Video-Details'
                     })
