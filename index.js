@@ -159,7 +159,7 @@ server.post('/web-hook', function (req, response, next) {
         }
 
         if (category == 'Read to learn') {
-            const query1 = query + " " + intent + " Tutorials";
+            const query1 = query + " " + intent + " "+type;
             axios.all([
                 axios.get(`https://www.googleapis.com/customsearch/v1?&key=${apiKey}&cx=014915153281259747060:rqmfryiuudy&q=${query1}&num=3&hl=en`)
             ])
