@@ -19,11 +19,11 @@ server.post('/web-hook', function (req, response, next) {
     const apiKeyPooja = 'AIzaSyAE1FuSqmtiMvN_sh080MkV8ySFuiStwTU';
     const apiKeyMe = 'AIzaSyDhGASYUnmjszNIjzQ2Pr58YNc7xekWxWg';
     const apiKeyJaggu = 'AIzaSyCQ9x6nIYd2dZDJj5crDkoopVBkDZbu4ws';
-    const apiKey='AIzaSyB0zGCeiZ9hoZtPPrdN3x2nrhVqg2N6Q2Y';
+    const apiKey = 'AIzaSyB0zGCeiZ9hoZtPPrdN3x2nrhVqg2N6Q2Y';
 
     const query = req.body.queryResult.queryText;
     const action = req.body.queryResult.action;
-    if(action == 'video-intent') {
+    if (action == 'video-intent') {
         const intent = query;
         const message = [{
             quickReplies: {
@@ -42,8 +42,8 @@ server.post('/web-hook', function (req, response, next) {
         })
     }
 
-    if(action == 'category'){
-        const category= query;
+    if (action == 'category') {
+        const category = query;
         const message = [{
             quickReplies: {
                 title: 'Tell us your expert level',
@@ -62,11 +62,13 @@ server.post('/web-hook', function (req, response, next) {
         })
     }
 
-    if(action == 'level'){
+    if (action == 'level') {
         console.log("level intent");
-        axios.get(`https://www.googleapis.com/youtube/v3/search?part=snippet&chart=mostPopular&type=video&maxResults=3&order=relevance&relevanceLanguage=en&q=${query}&key=${apiKey}`)
-            .then(response =>{
-                const videoResponse = JSON.stringify(response);
+        axios.all([
+            axios.get(`https://www.googleapis.com/youtube/v3/search?part=snippet&chart=mostPopular&type=video&maxResults=3&order=relevance&relevanceLanguage=en&q=${query}&key=${apiKey}`),
+        ])
+            .then(axios.spread((videoRes) => {
+                const videoResponse = JSON.stringify(videoRes);
                 const videoDetails = JSON.parse(videoResponse);
                 let link = 'https://www.youtube.com/embed/';
                 const messsage2 = [{
