@@ -24,13 +24,6 @@ server.post('/web-hook', function (req, response, next) {
     if (action == 'video-intent') {
         localStorage.setItem('intent', query);
         const message = [{
-
-            "text": {
-                "text": [
-                    "Text response from webhook"
-                ]
-            },
-
             quickReplies: {
                 title: "What would you prefer?",
                 quickReplies: [
@@ -41,6 +34,7 @@ server.post('/web-hook', function (req, response, next) {
         }];
 
         return response.json({
+            fulfillmentText: 'What would you prefer?',
             fulfillmentMessages: message,
             source: 'get-Video-Details'
         })
@@ -61,6 +55,7 @@ server.post('/web-hook', function (req, response, next) {
         }];
 
         return response.json({
+            fulfillmentText: 'Tell us your expert level',
             fulfillmentMessages: message,
             source: 'get-category-details'
         })
