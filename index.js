@@ -24,15 +24,14 @@ server.post('/web-hook', function (req, response, next) {
     if (action == 'video-intent') {
         localStorage.setItem('intent', query);
         const message = {
-            "text": {
-                "text": [
-                    "Which one do you prefer?"
+            text: {
+                text: [
+                    "What would you prefer?"
                 ]
             }
         };
         const message1 ={
             quickReplies: {
-                title: "What would you prefer?",
                 quickReplies: [
                     'Videos',
                     'Tutorials'
@@ -51,13 +50,12 @@ server.post('/web-hook', function (req, response, next) {
         const message = {
             text: {
                 text: [
-                    "Tell us ur expert level"
+                    "Tell us your expert level"
                 ]
             }
         };
         const message1 = {
             quickReplies: {
-                title: 'Tell us your expert level',
                 quickReplies: [
                     'Beginner',
                     'Intermediate',
