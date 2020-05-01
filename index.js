@@ -101,7 +101,7 @@ server.post('/web-hook', function (req, response, next) {
         const intent = localStorage.getItem('intent');
         const category = localStorage.getItem('category');
         const type = localStorage.getItem('type');
-        if (category == 'Videos') {
+        if (category == 'Learn through Videos') {
             const query1 = query + " " + intent + " "+ type;
             axios.all([
                 axios.get(`https://www.googleapis.com/youtube/v3/search?part=snippet&chart=mostPopular&type=video&maxResults=3&order=relevance&relevanceLanguage=en&q=${query1}&key=${apiKey}`)
@@ -158,7 +158,7 @@ server.post('/web-hook', function (req, response, next) {
                 }));
         }
 
-        if (category == 'Tutorials') {
+        if (category == 'Read to learn') {
             const query1 = query + " " + intent + " Tutorials";
             axios.all([
                 axios.get(`https://www.googleapis.com/customsearch/v1?&key=${apiKey}&cx=014915153281259747060:rqmfryiuudy&q=${query1}&num=3&hl=en`)
