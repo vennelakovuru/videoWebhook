@@ -27,8 +27,8 @@ server.post('/web-hook', function (req, response, next) {
             quickReplies: {
                 title: 'What would you prefer?',
                 quickReplies: [
-                    'Watch Videos',
-                    'Read Tutorials'
+                    'Videos',
+                    'Tutorials'
                 ]
             }
 
