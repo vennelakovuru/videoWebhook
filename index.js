@@ -73,9 +73,8 @@ server.post('/web-hook', function (req, response, next) {
     if (action == 'level') {
         const intent = localStorage.getItem('intent');
         const category = localStorage.getItem('category');
-        const query1 = query + " " + intent;
-        console.log(query1);
         if (category == 'Videos') {
+            const query1 = query + " " + intent + " course";
             axios.all([
                 axios.get(`https://www.googleapis.com/youtube/v3/search?part=snippet&chart=mostPopular&type=video&maxResults=3&order=relevance&relevanceLanguage=en&q=${query1}&key=${apiKey}`)
             ])
@@ -132,7 +131,7 @@ server.post('/web-hook', function (req, response, next) {
         }
 
         if (category == 'Tutorials') {
-
+            const query1 = query + " " + intent + " Tutorials";
             axios.all([
                 axios.get(`https://www.googleapis.com/customsearch/v1?&key=${apiKey}&cx=014915153281259747060:rqmfryiuudy&q=${query1}&num=3&hl=en`)
             ])
@@ -144,13 +143,24 @@ server.post('/web-hook', function (req, response, next) {
 
                     const message = [{
                         linkOutSuggestion: {
-                            destinationName: 'string',
-                            uri: 'string'
+                            destinationName: linkDetails.items[0].link,
+                            uri: linkDetails.items[0].link
                         }
-                    }];
+                    },
+                        {
+                            linkOutSuggestion: {
+                                destinationName: linkDetails.items[1].link,
+                                uri: linkDetails.items[1].link
+                            }
+                        },
+                        {
+                            linkOutSuggestion: {
+                                destinationName: linkDetails.items[2].link,
+                                uri: linkDetails.items[2].link
+                            }
+                        }];
 
                     return response.json({
-                        fulfillmentText: linksData,
                         fulfillmentMessages: message,
                         speech: linksData,
                         source: 'get-Video-Details'
