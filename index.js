@@ -144,7 +144,7 @@ server.post('/web-hook', function (req, response, next) {
 
 
                     return response.json({
-                        fulfillmentMessages: message1,
+                        fulfillmentMessages: message2,
                         source: 'get-Details'
                     })
                         .catch(error => {
