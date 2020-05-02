@@ -77,10 +77,10 @@ server.post('/web-hook', function (req, response, next) {
         const intent = localStorage.getItem('intent');
         const type = localStorage.getItem('type');
         const query1 = query + " " + intent + " "+type;
+        console.log(query1);
             axios.all([
                 axios.get(`https://www.googleapis.com/youtube/v3/search?part=snippet&chart=mostPopular&type=video&maxResults=3&order=relevance&relevanceLanguage=en&q=${query1}&key=${apiKey}`),
                 axios.get(`https://www.googleapis.com/customsearch/v1?&key=${apiKey}&cx=014915153281259747060:rqmfryiuudy&q=${query1}&num=3&hl=en`)
-
             ])
                 .then(axios.spread((videoRes, linkRes) => {
                     const videoResponse = JSON.stringify(videoRes.data);
