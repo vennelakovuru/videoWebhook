@@ -16,8 +16,8 @@ server.use(bodyParser.json());
 
 
 server.post('/web-hook', function (req, response, next) {
-    const apiKeypooja = 'AIzaSyAE1FuSqmtiMvN_sh080MkV8ySFuiStwTU';
-    const apiKey = 'AIzaSyDhGASYUnmjszNIjzQ2Pr58YNc7xekWxWg';
+    const apiKey = 'AIzaSyAE1FuSqmtiMvN_sh080MkV8ySFuiStwTU';
+    const apiKeyME = 'AIzaSyDhGASYUnmjszNIjzQ2Pr58YNc7xekWxWg';
     const apiKeyJaggu = 'AIzaSyCQ9x6nIYd2dZDJj5crDkoopVBkDZbu4ws';
     const query = req.body.queryResult.queryText;
     const action = req.body.queryResult.action;
