@@ -101,15 +101,38 @@ server.post('/web-hook', function (req, response, next) {
         const level = localStorage.getItem('level');
         const type = localStorage.getItem('type');
         const query1 = level + " " + intent + " "+type;
-        if (query == 'Learn through Videos') {
             axios.all([
-                axios.get(`https://www.googleapis.com/youtube/v3/search?part=snippet&chart=mostPopular&type=video&maxResults=3&order=relevance&relevanceLanguage=en&q=${query1}&key=${apiKey}`)
+                axios.get(`https://www.googleapis.com/youtube/v3/search?part=snippet&chart=mostPopular&type=video&maxResults=3&order=relevance&relevanceLanguage=en&q=${query1}&key=${apiKey}`),
+                axios.get(`https://www.googleapis.com/customsearch/v1?&key=${apiKey}&cx=014915153281259747060:rqmfryiuudy&q=${query1}&num=3&hl=en`)
+
             ])
                 .then(axios.spread((videoRes, linkRes) => {
                     const videoResponse = JSON.stringify(videoRes.data);
                     const videoDetails = JSON.parse(videoResponse);
                     let link = 'https://www.youtube.com/watch?v=';
-                    const messsage = [{
+                    const linkResponse = JSON.stringify(linkRes.data);
+                    const linkDetails = JSON.parse(linkResponse);
+
+                    const message1 = [{
+                        linkOutSuggestion: {
+                            destinationName: linkDetails.items[0].link,
+                            uri: linkDetails.items[0].link
+                        }
+                    },
+                        {
+                            linkOutSuggestion: {
+                                destinationName: linkDetails.items[1].link,
+                                uri: linkDetails.items[1].link
+                            }
+                        },
+                        {
+                            linkOutSuggestion: {
+                                destinationName: linkDetails.items[2].link,
+                                uri: linkDetails.items[2].link
+                            }
+                        }];
+
+                    const message2 = [{
                         card: {
                             imageUri: videoDetails.items[0].snippet.thumbnails.high.url,
                             buttons: [
@@ -145,57 +168,14 @@ server.post('/web-hook', function (req, response, next) {
 
 
                     return response.json({
-                        fulfillmentText: link + videoDetails.items[0].id.videoId,
-                        fulfillmentMessages: messsage,
-                        speech: link + videoDetails.items[0].id.videoId,
-                        source: 'get-Video-Details'
+                        fulfillmentMessages: [message1, message2],
+                        source: 'get-Details'
                     })
                         .catch(error => {
                             console.log('heyehey', error);
                         });
 
                 }));
-        }
-        if (query == 'Read to learn') {
-            axios.all([
-                axios.get(`https://www.googleapis.com/customsearch/v1?&key=${apiKey}&cx=014915153281259747060:rqmfryiuudy&q=${query1}&num=3&hl=en`)
-            ])
-                .then(axios.spread((linkRes) => {
-                    const linkResponse = JSON.stringify(linkRes.data);
-                    const linkDetails = JSON.parse(linkResponse);
-
-                    const linksData = linkDetails.items[0].link;
-
-                    const message = [{
-                        linkOutSuggestion: {
-                            destinationName: linkDetails.items[0].link,
-                            uri: linkDetails.items[0].link
-                        }
-                    },
-                        {
-                            linkOutSuggestion: {
-                                destinationName: linkDetails.items[1].link,
-                                uri: linkDetails.items[1].link
-                            }
-                        },
-                        {
-                            linkOutSuggestion: {
-                                destinationName: linkDetails.items[2].link,
-                                uri: linkDetails.items[2].link
-                            }
-                        }];
-
-                    return response.json({
-                        fulfillmentMessages: message,
-                        speech: linksData,
-                        source: 'get-Video-Details'
-                    })
-                        .catch(error => {
-                            console.log('heyehey', error);
-                        });
-
-                }));
-        }
     }
 });
 
