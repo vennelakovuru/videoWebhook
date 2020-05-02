@@ -31,7 +31,7 @@ server.post('/web-hook', function (req, response, next) {
                 ]
             }
         };
-        const message1 = {
+        const message1 ={
             quickReplies: {
                 quickReplies: [
                     'Courses',
@@ -42,7 +42,7 @@ server.post('/web-hook', function (req, response, next) {
         };
 
         return response.json({
-            fulfillmentMessages: [message, message1],
+            fulfillmentMessages: [message,message1],
             source: 'get-Video-Details'
         })
     }
@@ -76,87 +76,82 @@ server.post('/web-hook', function (req, response, next) {
     if (action == 'level') {
         const intent = localStorage.getItem('intent');
         const type = localStorage.getItem('type');
-        const query1 = query + " " + intent + " " + type;
-        console.log(query1);
-        axios.all([
-            axios.get(`https://www.googleapis.com/youtube/v3/search?part=snippet&chart=mostPopular&type=video&maxResults=3&order=relevance&relevanceLanguage=en&q=${query1}&key=${apiKey}`),
-            axios.get(`https://www.googleapis.com/customsearch/v1?&key=${apiKey}&cx=014915153281259747060:rqmfryiuudy&q=${query1}&num=3&hl=en`)
+        const query1 = query + " " + intent + " "+type;
+            axios.all([
+                axios.get(`https://www.googleapis.com/youtube/v3/search?part=snippet&chart=mostPopular&type=video&maxResults=3&order=relevance&relevanceLanguage=en&q=${query1}&key=${apiKey}`),
+                axios.get(`https://www.googleapis.com/customsearch/v1?&key=${apiKey}&cx=014915153281259747060:rqmfryiuudy&q=${query1}&num=3&hl=en`)
 
-        ])
-            .then(axios.spread((videoRes, linkRes) => {
-                const videoResponse = JSON.stringify(videoRes.data);
-                const videoDetails = JSON.parse(videoResponse);
-                let link = 'https://www.youtube.com/watch?v=';
-                const linkResponse = JSON.stringify(linkRes.data);
-                const linkDetails = JSON.parse(linkResponse);
+            ])
+                .then(axios.spread((videoRes, linkRes) => {
+                    const videoResponse = JSON.stringify(videoRes.data);
+                    const videoDetails = JSON.parse(videoResponse);
+                    let link = 'https://www.youtube.com/watch?v=';
+                    const linkResponse = JSON.stringify(linkRes.data);
+                    const linkDetails = JSON.parse(linkResponse);
 
-                const message1 = {
-                    linkOutSuggestion: {
-                        destinationName: linkDetails.items[0].link,
-                        uri: linkDetails.items[0].link
-                    }
-                };
-
-                const message2 = {
-                    linkOutSuggestion: {
-                        destinationName: linkDetails.items[1].link,
-                        uri: linkDetails.items[1].link
-                    }
-                };
-                const message3 =
-                    {
+                    const message1 = [{
                         linkOutSuggestion: {
-                            destinationName: linkDetails.items[2].link,
-                            uri: linkDetails.items[2].link
+                            destinationName: linkDetails.items[0].link,
+                            uri: linkDetails.items[0].link
                         }
-                    };
-
-                const message4 = {
-                    card: {
-                        imageUri: videoDetails.items[0].snippet.thumbnails.high.url,
-                        buttons: [
-                            {
-                                text: videoDetails.items[0].snippet.title,
-                                postback: link + videoDetails.items[0].id.videoId
+                    },
+                        {
+                            linkOutSuggestion: {
+                                destinationName: linkDetails.items[1].link,
+                                uri: linkDetails.items[1].link
                             }
-                        ]
-                    }
-                };
-                const message5 = {
-                    card: {
-                        imageUri: videoDetails.items[1].snippet.thumbnails.high.url,
-                        buttons: [
-                            {
-                                text: videoDetails.items[1].snippet.title,
-                                postback: link + videoDetails.items[1].id.videoId
+                        },
+                        {
+                            linkOutSuggestion: {
+                                destinationName: linkDetails.items[2].link,
+                                uri: linkDetails.items[2].link
                             }
-                        ]
-                    }
-                };
+                        }];
 
-                const message6 = {
-                    card: {
-                        imageUri: videoDetails.items[2].snippet.thumbnails.high.url,
-                        buttons: [
-                            {
-                                text: videoDetails.items[2].snippet.title,
-                                postback: link + videoDetails.items[2].id.videoId
+                    const message2 = [{
+                        card: {
+                            imageUri: videoDetails.items[0].snippet.thumbnails.high.url,
+                            buttons: [
+                                {
+                                    text: videoDetails.items[0].snippet.title,
+                                    postback: link + videoDetails.items[0].id.videoId
+                                }
+                            ]
+                        }
+                    },
+                        {
+                            card: {
+                                imageUri: videoDetails.items[1].snippet.thumbnails.high.url,
+                                buttons: [
+                                    {
+                                        text: videoDetails.items[1].snippet.title,
+                                        postback: link + videoDetails.items[1].id.videoId
+                                    }
+                                ]
                             }
-                        ]
-                    }
-                };
+                        },
+                        {
+                            card: {
+                                imageUri: videoDetails.items[2].snippet.thumbnails.high.url,
+                                buttons: [
+                                    {
+                                        text: videoDetails.items[2].snippet.title,
+                                        postback: link + videoDetails.items[2].id.videoId
+                                    }
+                                ]
+                            }
+                        }];
 
 
-                return response.json({
-                    fulfillmentMessages: [message1, message2, message3, message4, message5, message6],
-                    source: 'get-Details'
-                })
-                    .catch(error => {
-                        console.log('heyehey', error);
-                    });
+                    return response.json({
+                        fulfillmentMessages: [message1],
+                        source: 'get-Details'
+                    })
+                        .catch(error => {
+                            console.log('heyehey', error);
+                        });
 
-            }));
-
+                }));
     }
 });
 
