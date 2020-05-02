@@ -76,7 +76,7 @@ server.post('/web-hook', function (req, response, next) {
         const message = {
             text: {
                 text: [
-                    "What would you prefer?"
+                    "What kind of learning would you go for?"
                 ]
             }
         };
