@@ -71,36 +71,12 @@ server.post('/web-hook', function (req, response, next) {
             source: 'get-category-details'
         })
     }
+
+
     if (action == 'level') {
-        localStorage.setItem('level', query);
-        const message = {
-            text: {
-                text: [
-                    "What would you prefer?"
-                ]
-            }
-        };
-        const message1 ={
-            quickReplies: {
-                quickReplies: [
-                    'Learn through Videos',
-                    'Read to learn'
-                ]
-            }
-        };
-
-        return response.json({
-            fulfillmentMessages: [message,message1],
-            source: 'get-Video-Details'
-        })
-    }
-
-
-    if (action == 'category') {
         const intent = localStorage.getItem('intent');
-        const level = localStorage.getItem('level');
         const type = localStorage.getItem('type');
-        const query1 = level + " " + intent + " "+type;
+        const query1 = query + " " + intent + " "+type;
             axios.all([
                 axios.get(`https://www.googleapis.com/youtube/v3/search?part=snippet&chart=mostPopular&type=video&maxResults=3&order=relevance&relevanceLanguage=en&q=${query1}&key=${apiKey}`),
                 axios.get(`https://www.googleapis.com/customsearch/v1?&key=${apiKey}&cx=014915153281259747060:rqmfryiuudy&q=${query1}&num=3&hl=en`)
