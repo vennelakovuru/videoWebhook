@@ -27,7 +27,7 @@ server.post('/web-hook', function (req, response, next) {
         const message = {
             text: {
                 text: [
-                    "Select your preference?"
+                    "Chose your preference"
                 ]
             }
         };
@@ -52,7 +52,7 @@ server.post('/web-hook', function (req, response, next) {
         const message = {
             text: {
                 text: [
-                    "Tell us your expert level"
+                    "Tell us your expertise"
                 ]
             }
         };
@@ -83,8 +83,8 @@ server.post('/web-hook', function (req, response, next) {
         const message1 ={
             quickReplies: {
                 quickReplies: [
-                    'Learn through Videos',
-                    'Read to learn'
+                    'Video',
+                    'Text'
                 ]
             }
         };
@@ -101,7 +101,7 @@ server.post('/web-hook', function (req, response, next) {
         const level = localStorage.getItem('level');
         const type = localStorage.getItem('type');
         const query1 = level + " " + intent + " "+type;
-        if (query == 'Learn through Videos') {
+        if (query == 'Video') {
             axios.all([
                 axios.get(`https://www.googleapis.com/youtube/v3/search?part=snippet&chart=mostPopular&type=video&maxResults=3&order=relevance&relevanceLanguage=en&q=${query1}&key=${apiKey}`)
             ])
@@ -156,7 +156,7 @@ server.post('/web-hook', function (req, response, next) {
 
                 }));
         }
-        if (query == 'Read to learn') {
+        if (query == 'Text') {
             axios.all([
                 axios.get(`https://www.googleapis.com/customsearch/v1?&key=${apiKey}&cx=014915153281259747060:rqmfryiuudy&q=${query1}&num=3&hl=en`)
             ])
