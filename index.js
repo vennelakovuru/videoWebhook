@@ -89,26 +89,28 @@ server.post('/web-hook', function (req, response, next) {
                     const linkResponse = JSON.stringify(linkRes.data);
                     const linkDetails = JSON.parse(linkResponse);
 
-                    const message1 = [{
+                    const message1 = {
                         linkOutSuggestion: {
                             destinationName: linkDetails.items[0].link,
                             uri: linkDetails.items[0].link
                         }
-                    },
-                        {
+                    };
+
+                    const message2 =   {
                             linkOutSuggestion: {
                                 destinationName: linkDetails.items[1].link,
                                 uri: linkDetails.items[1].link
                             }
-                        },
+                        };
+                        const message3 =
                         {
                             linkOutSuggestion: {
                                 destinationName: linkDetails.items[2].link,
                                 uri: linkDetails.items[2].link
                             }
-                        }];
+                        };
 
-                    const message2 = [{
+                    const message4 = {
                         card: {
                             imageUri: videoDetails.items[0].snippet.thumbnails.high.url,
                             buttons: [
@@ -118,8 +120,8 @@ server.post('/web-hook', function (req, response, next) {
                                 }
                             ]
                         }
-                    },
-                        {
+                    };
+                     const message5 =   {
                             card: {
                                 imageUri: videoDetails.items[1].snippet.thumbnails.high.url,
                                 buttons: [
@@ -129,8 +131,9 @@ server.post('/web-hook', function (req, response, next) {
                                     }
                                 ]
                             }
-                        },
-                        {
+                        };
+
+                     const message6 =  {
                             card: {
                                 imageUri: videoDetails.items[2].snippet.thumbnails.high.url,
                                 buttons: [
@@ -140,11 +143,11 @@ server.post('/web-hook', function (req, response, next) {
                                     }
                                 ]
                             }
-                        }];
+                        };
 
 
                     return response.json({
-                        fulfillmentMessages: [message1, message2],
+                        fulfillmentMessages: [message1, message2, message3, message4, message05, message6],
                         source: 'get-Details'
                     })
                         .catch(error => {
